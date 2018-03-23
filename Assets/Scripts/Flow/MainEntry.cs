@@ -13,7 +13,12 @@ public class MainEntry : MonoBehaviour {
 
     public void Update()
     {
-        
+        FlowManager.Instance.Update(Time.deltaTime);
+    }
+
+    public void FixedUpdate()
+    {
+        FlowManager.Instance.FixedUpdate(Time.fixedDeltaTime);
     }
 
 

@@ -24,14 +24,43 @@ public class FlowManager  {
     #endregion
 
     public SceneNames currentScene;
+    Flow currentFlow;
 
     public void InitializeFlowManager(SceneNames initialScene)
     {
         currentScene = initialScene;
+        currentFlow = CreateFlow(initialScene);
+        currentFlow.InitializeFlow();
     }
 
     public void Update(float dt)
     {
+        if(currentFlow != null)
+            currentFlow.UpdateFlow(dt);
+    }
 
+    public void FixedUpdate(float dt)
+    {
+        if (currentFlow != null)
+            currentFlow.FixedUpdateFlow(dt);
+    }
+
+    private Flow CreateFlow(SceneNames _flowToLoad)
+    {
+        Flow toRet;
+        switch (_flowToLoad)
+        {
+            case SceneNames.MainMenu:
+                toRet = new MainMenuFlow();
+                break;
+            case SceneNames.MainScene:
+                toRet = new GameFlow();
+                break;
+            default:
+                toRet = new GameFlow();
+                Debug.LogError("Unhandled Switch: " + _flowToLoad.ToString());
+                break;
+        }
+        return toRet;
     }
 }
