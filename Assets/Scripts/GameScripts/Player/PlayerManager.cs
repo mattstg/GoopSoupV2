@@ -22,7 +22,7 @@ public class PlayerManager
     }
     #endregion
 
-    Player player;
+    public Player player { private set; get; }
 
     public void Initialize()
     {
