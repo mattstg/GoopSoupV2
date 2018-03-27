@@ -4,36 +4,35 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour {
 
+    MonsterManager monsterManager;
     protected string monsterPrefabName;
     float timeTillNextBreed;
     float timeToBreed;
-    List<Monster> childMonsters;
 
-    public virtual void InitializeMonsterBreeder(float _timeToBreed)
+    public virtual void InitializeMonsterBreeder(MonsterManager _monsterManager, float _timeToBreed)
     {
-        childMonsters = new List<Monster>();
+        monsterManager = _monsterManager;
         timeToBreed = _timeToBreed;
         timeTillNextBreed = Time.time + timeToBreed;
     }
 
-	public virtual void UpdateMonsterBreeder(float dt)
+	public virtual void UpdateMonsterSpawner(float dt)
     {
         if (Time.time > timeTillNextBreed)
         {
             SpawnMonster();
             timeTillNextBreed = Time.time + timeToBreed;
         }
-        foreach (Monster m in childMonsters)
-            m.UpdateMonster(dt);
     }
 
     public virtual void SpawnMonster()
     {
-        GameObject spawnedMonster = MasterObjectPool.Instance.GetObjectFromPool(monsterPrefabName);
-        if(!spawnedMonster) //Pool was empty, create a new one
-            spawnedMonster = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Monsters/" + monsterPrefabName));
-        childMonsters.Add(spawnedMonster.GetComponent<Monster>());
-        spawnedMonster.GetComponent<Monster>().Initialize();
+        GameObject spawnedMonsterObj = MasterObjectPool.Instance.GetObjectFromPool(monsterPrefabName);
+        if(!spawnedMonsterObj) //Pool was empty, create a new one
+            spawnedMonsterObj = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Monsters/" + monsterPrefabName));
+        Monster spawnedMonster = spawnedMonsterObj.GetComponent<Monster>();
+        spawnedMonster.Initialize();
         spawnedMonster.transform.position = transform.position + Random.onUnitSphere * 3;
+        monsterManager.AddMonster(spawnedMonster);
     }
 }

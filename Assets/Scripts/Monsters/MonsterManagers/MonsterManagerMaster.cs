@@ -41,9 +41,13 @@ public class MonsterManagerMaster {
     {
         //At the moment, Random is not implemented for one type, will show generics later for that
         Vector2 loc = new Vector2(Random.Range(0, GV.Map_Size_XY), Random.Range(0, GV.Map_Size_XY));
-        MonsterManager mm = new SlimeMM();
-        mm.CreateBreeder(loc);
-        monsterManagers.Add(GV.MonsterTypes.Slime, mm);        
+        GV.MonsterTypes randMonsterType = GV.GetRandomEnum<GV.MonsterTypes>();
+        if (!monsterManagers.ContainsKey(randMonsterType))
+        {
+            MonsterManager mm = new MonsterManager(randMonsterType);
+            mm.CreateBreeder(loc);
+            monsterManagers.Add(randMonsterType, mm);
+        }
     }
 
     public void UpdateMonsterManagers(float dt)
