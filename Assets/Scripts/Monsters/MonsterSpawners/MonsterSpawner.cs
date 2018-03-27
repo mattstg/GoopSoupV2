@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MonsterBreeder : MonoBehaviour {
+public class MonsterSpawner : MonoBehaviour {
 
     protected string monsterPrefabName;
     float timeTillNextBreed;

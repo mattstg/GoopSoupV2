@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeMB : MonsterBreeder {
+public class SlimeMS : MonsterSpawner {
 
     public override void InitializeMonsterBreeder(float _timeToBreed)
     {

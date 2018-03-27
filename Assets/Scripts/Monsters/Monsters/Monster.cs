@@ -33,6 +33,11 @@ public class Monster : MonoBehaviour {
         }
     }
 
+    protected virtual void AttackUpdate()
+    {
+
+    }
+
     protected virtual void IdleUpdate()
     {
         if(Vector2.Distance(PlayerManager.Instance.player.transform.position, transform.position) < monsterAggroRange)

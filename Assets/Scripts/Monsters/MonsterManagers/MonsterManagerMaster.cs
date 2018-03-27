@@ -40,7 +40,7 @@ public class MonsterManagerMaster {
     public void SpawnRandomMonsterBreeder()
     {
         //At the moment, Random is not implemented for one type, will show generics later for that
-        Vector2 loc = new Vector2(Random.Range(GV.Map_Size_XY, -GV.Map_Size_XY), Random.Range(GV.Map_Size_XY, -GV.Map_Size_XY));
+        Vector2 loc = new Vector2(Random.Range(0, GV.Map_Size_XY), Random.Range(0, GV.Map_Size_XY));
         MonsterManager mm = new SlimeMM();
         mm.CreateBreeder(loc);
         monsterManagers.Add(GV.MonsterTypes.Slime, mm);        

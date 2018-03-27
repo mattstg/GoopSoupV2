@@ -23,10 +23,13 @@ public class PlayerManager
     #endregion
 
     public Player player { private set; get; }
+    public Cinemachine.CinemachineVirtualCamera vrCam;
 
     public void Initialize()
     {
+        vrCam = GameObject.FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
         SpawnPlayerAtLoc(new Vector2());
+        
     }
 
     public void Update(float dt)
@@ -55,5 +58,6 @@ public class PlayerManager
         }
         player.transform.position = atLoc;
         player.PlayerSpawned();
+        vrCam.Follow = player.transform;
     }
 }
