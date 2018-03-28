@@ -40,12 +40,12 @@ public class MonsterManagerMaster {
     public void SpawnRandomMonsterBreeder()
     {
         //At the moment, Random is not implemented for one type, will show generics later for that
-        Vector2 loc = new Vector2(Random.Range(1, GV.Map_Size_XY - 1), Random.Range(1, GV.Map_Size_XY - 1));
+        Vector2 loc = GV.GetRandomSpotInMap();
         GV.MonsterTypes randMonsterType = GV.GetRandomEnum<GV.MonsterTypes>();
         if (!monsterManagers.ContainsKey(randMonsterType))
         {
             MonsterManager mm = new MonsterManager(randMonsterType);
-            mm.CreateBreeder(loc);
+            mm.CreateSpawner(loc);
             monsterManagers.Add(randMonsterType, mm);
         }
     }

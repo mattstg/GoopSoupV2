@@ -6,8 +6,8 @@ using UnityEngine;
 
 public class GV {
 
-    public enum MonsterTypes { Slime, Bat }
-    public static readonly float Map_Size_XY = 32; //NxN map size
+    public enum MonsterTypes { Slime }
+    public static readonly Vector2 Map_Size_XY = new Vector2(32,17); //NxN map size
     public static readonly float Monster_Breed_Time = 5;
     public static readonly float Monster_Breed_SpawnDist = 2; //How far spawns from breeder
 
@@ -21,5 +21,10 @@ public class GV {
 
         List<T> fullEnumList = System.Enum.GetValues(typeof(T)).Cast<T>().ToList();
         return fullEnumList[UnityEngine.Random.Range(0, fullEnumList.Count)];
+    }
+
+    public static Vector2 GetRandomSpotInMap()
+    {
+        return new Vector2(UnityEngine.Random.Range(1, Map_Size_XY.x - 1), UnityEngine.Random.Range(1, Map_Size_XY.y - 1));
     }
 }

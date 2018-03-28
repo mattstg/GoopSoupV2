@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlimeMonster : Monster {
+public class Slime : Monster {
 
     public override void Initialize()
     {

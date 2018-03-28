@@ -5,12 +5,13 @@ using UnityEngine;
 public class MonsterSpawner : MonoBehaviour {
 
     MonsterManager monsterManager;
-    protected string monsterPrefabName;
+    GV.MonsterTypes monsterType;
     float timeTillNextBreed;
     float timeToBreed;
 
-    public virtual void InitializeMonsterBreeder(MonsterManager _monsterManager, float _timeToBreed)
+    public virtual void InitializeMonsterSpawner(MonsterManager _monsterManager, float _timeToBreed, GV.MonsterTypes _monsterType)
     {
+        monsterType = _monsterType;
         monsterManager = _monsterManager;
         timeToBreed = _timeToBreed;
         timeTillNextBreed = Time.time + timeToBreed;
@@ -29,8 +30,7 @@ public class MonsterSpawner : MonoBehaviour {
     {
         //GameObject spawnedMonsterObj = MasterObjectPool.Instance.GetObjectFromPool(monsterPrefabName);
         //if(!spawnedMonsterObj) //Pool was empty, create a new one
-          GameObject  spawnedMonsterObj = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Monsters/" + monsterPrefabName));
-        Monster spawnedMonster = spawnedMonsterObj.GetComponent<Monster>();
+        Monster spawnedMonster = MonsterFactory.Instance.CreateMonster(monsterType.ToString());
         spawnedMonster.Initialize();
         spawnedMonster.transform.position = transform.position + Random.onUnitSphere * 3;
         monsterManager.AddMonster(spawnedMonster);

@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Monster : MonoBehaviour {
+public class Monster : MonoBehaviour, IPoolable {
 
     enum MonsterMode {Idle, Attacking, Moving }
     MonsterMode monsterMode = MonsterMode.Idle;
@@ -10,6 +11,8 @@ public class Monster : MonoBehaviour {
     Vector2 target;
     protected float monsterAggroRange;
     protected float monsterSpeed;
+
+    
 
     public virtual void Initialize()
     {
@@ -67,4 +70,18 @@ public class Monster : MonoBehaviour {
     {
 
     }
+
+
+
+    public void Pooled()
+    {
+        //Turn off things that matter, like animation
+    }
+
+    public void DePooled()
+    {
+        //Set active again, turn on anim and reset values and etc
+    }
+
+    public GameObject GetGameObject { get { return gameObject; } }
 }
