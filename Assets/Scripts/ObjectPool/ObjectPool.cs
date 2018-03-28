@@ -3,10 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class ObjectPool  {
+    
+    #region
+    private static ObjectPool instance;
 
-    Stack<GameObject> pooledObjects = new Stack<GameObject>();
+    private ObjectPool() { }
 
-	public void AddToPool(GameObject gameObject)
+    public static ObjectPool Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new ObjectPool();
+            }
+            return instance;
+        }
+    }
+    #endregion
+
+    Transform objectPoolParent;
+    Dictionary<string, List<GameObject>> pooledObjects;
+
+    	public void AddToPool(GameObject gameObject)
     {
 
     }

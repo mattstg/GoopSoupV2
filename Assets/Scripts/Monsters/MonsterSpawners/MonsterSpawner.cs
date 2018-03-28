@@ -27,9 +27,9 @@ public class MonsterSpawner : MonoBehaviour {
 
     public virtual void SpawnMonster()
     {
-        GameObject spawnedMonsterObj = MasterObjectPool.Instance.GetObjectFromPool(monsterPrefabName);
-        if(!spawnedMonsterObj) //Pool was empty, create a new one
-            spawnedMonsterObj = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Monsters/" + monsterPrefabName));
+        //GameObject spawnedMonsterObj = MasterObjectPool.Instance.GetObjectFromPool(monsterPrefabName);
+        //if(!spawnedMonsterObj) //Pool was empty, create a new one
+          GameObject  spawnedMonsterObj = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Monsters/" + monsterPrefabName));
         Monster spawnedMonster = spawnedMonsterObj.GetComponent<Monster>();
         spawnedMonster.Initialize();
         spawnedMonster.transform.position = transform.position + Random.onUnitSphere * 3;
