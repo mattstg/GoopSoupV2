@@ -20,7 +20,7 @@ TagManager:
   - Goop
   - CameraColi
   - Monster
-  - 
+  - Spawner
   - 
   - 
   - 
@@ -52,4 +52,7 @@ TagManager:
     locked: 0
   - name: Trees
     uniqueID: 3506848667
+    locked: 0
+  - name: Spawner
+    uniqueID: 3836155669
     locked: 0

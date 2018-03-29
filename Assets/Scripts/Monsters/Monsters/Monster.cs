@@ -12,8 +12,6 @@ public class Monster : MonoBehaviour, IPoolable {
     protected float monsterAggroRange;
     protected float monsterSpeed;
 
-    
-
     public virtual void Initialize()
     {
         rb = GetComponent<Rigidbody2D>();
