@@ -29,7 +29,8 @@ public class MonsterFactory {
             {GV.MonsterTypes.Slime, new MonsterInfoPair(new MonsterInfo(GV.MonsterTypes.Slime, typeof(Slime)   ,1, .25f, 1), new SpawnerInfo(GV.MonsterTypes.Slime, 10, 5,    0f,2))},
             {GV.MonsterTypes.Wisp,  new MonsterInfoPair(new MonsterInfo(GV.MonsterTypes.Wisp,  typeof(Monster) ,1, .5f,  1), new SpawnerInfo(GV.MonsterTypes.Wisp,  10, 3.5f, 0f,2))},
             {GV.MonsterTypes.Golem, new MonsterInfoPair(new MonsterInfo(GV.MonsterTypes.Golem, typeof(Monster) ,1, .25f, 1), new SpawnerInfo(GV.MonsterTypes.Golem, 10, 15,   0f,2))},
-            {GV.MonsterTypes.Chicken, new MonsterInfoPair(new MonsterInfo(GV.MonsterTypes.Chicken, typeof(Monster) ,1, .25f, 1), new SpawnerInfo(GV.MonsterTypes.Chicken, 10, 3,   0f,2))}
+            {GV.MonsterTypes.Chicken, new MonsterInfoPair(new MonsterInfo(GV.MonsterTypes.Chicken, typeof(Monster) ,1, .25f, 1), new SpawnerInfo(GV.MonsterTypes.Chicken, 10, 3,   0f,2))},
+            {GV.MonsterTypes.Bat, new MonsterInfoPair(new MonsterInfo(GV.MonsterTypes.Bat, typeof(Monster) ,1, .25f, 1), new SpawnerInfo(GV.MonsterTypes.Bat, 10, 2,   0f,2))}
         };
     }
 
