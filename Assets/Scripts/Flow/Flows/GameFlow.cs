@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class GameFlow : Flow {
+    //https://codeblog.jonskeet.uk/2008/08/09/making-reflection-fly-and-exploring-delegates/
+    ParticleManager pm;
 
-	public override void InitializeFlow()
+    public override void InitializeFlow()
     {
+        pm = new ParticleManager();
+        pm.Setup();
+        ParticleSystem ps = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("PSys")).GetComponent<ParticleSystem>();
+        pm.SetSystemValues(ps, ParticleManager.ModuleType.Main, "duration", 15);
+        float f = ps.main.duration;
         PlayerManager.Instance.Initialize();
         MonsterManagerMaster.Instance.InitializeInitialMonsterManagers();
     }
