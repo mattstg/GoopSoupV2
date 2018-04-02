@@ -5,16 +5,20 @@ using UnityEngine;
 public class MonsterSpawner : MonoBehaviour {
 
     MonsterManager monsterManager;
-    GV.MonsterTypes monsterType;
+    SpawnerInfo spawnerInfo;
+    MonsterInfo monsterCreates;
     float timeTillNextBreed;
-    float timeToBreed;
 
-    public virtual void InitializeMonsterSpawner(MonsterManager _monsterManager, float _timeToBreed, GV.MonsterTypes _monsterType)
+    public void LinkMonsterManager()
     {
-        monsterType = _monsterType;
+    }
+
+    public virtual void InitializeMonsterSpawner(SpawnerInfo _spawnerInfo, MonsterInfo _monsterCreates, MonsterManager _monsterManager)
+    {
         monsterManager = _monsterManager;
-        timeToBreed = _timeToBreed;
-        timeTillNextBreed = Time.time + timeToBreed;
+        monsterCreates = _monsterCreates;
+        spawnerInfo = _spawnerInfo;
+        timeTillNextBreed = Time.time + spawnerInfo.spawnRate;
     }
 
 	public virtual void UpdateMonsterSpawner(float dt)
@@ -22,17 +26,16 @@ public class MonsterSpawner : MonoBehaviour {
         if (Time.time > timeTillNextBreed)
         {
             SpawnMonster();
-            timeTillNextBreed = Time.time + timeToBreed;
+            timeTillNextBreed = Time.time + spawnerInfo.spawnRate;
         }
     }
 
     public virtual void SpawnMonster()
     {
-        //GameObject spawnedMonsterObj = MasterObjectPool.Instance.GetObjectFromPool(monsterPrefabName);
-        //if(!spawnedMonsterObj) //Pool was empty, create a new one
-        Monster spawnedMonster = MonsterFactory.Instance.CreateMonster(monsterType.ToString());
+        Monster spawnedMonster = MonsterFactory.Instance.CreateMonster(monsterCreates.monsterType);
         spawnedMonster.Initialize();
         spawnedMonster.transform.position = transform.position + Random.onUnitSphere * 3;
         monsterManager.AddMonster(spawnedMonster);
     }
+
 }

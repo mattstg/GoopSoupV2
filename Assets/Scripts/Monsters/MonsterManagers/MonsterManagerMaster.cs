@@ -25,13 +25,7 @@ public class MonsterManagerMaster {
     public Dictionary<GV.MonsterTypes, MonsterManager> monsterManagers = new Dictionary<GV.MonsterTypes, MonsterManager>();
     //public float testVar { private set; get; }
 
-    public void InitializeInitialMonsterManagers()
-    {
-        SpawnRandomMonsterBreeder();
-        //testVar = 5;
-        //Debug.Log("testvar: " + testVar);
-    }
-
+    public void InitializeInitialMonsterManagers() { } //Empty for now
     
 
     /// <summary>

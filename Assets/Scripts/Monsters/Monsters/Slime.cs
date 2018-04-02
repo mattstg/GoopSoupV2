@@ -6,8 +6,6 @@ public class Slime : Monster {
 
     public override void Initialize()
     {
-        monsterAggroRange = 4;
-        monsterSpeed = 2;
         base.Initialize();
     }
 

@@ -6,11 +6,10 @@ using UnityEngine;
 
 public class GV {
 
-    public enum MonsterTypes { Slime }
+    public enum MonsterTypes { Slime, Wisp, Golem, Chicken, Bat }
     public static readonly Vector2 Map_Size_XY = new Vector2(32,17); //NxN map size
-    public static readonly float Monster_Breed_Time = 5;
     public static readonly float Monster_Breed_SpawnDist = 2; //How far spawns from breeder
-
+    public static readonly float Spawner_Summon_Time = 1; //Attempts to summon a spawner ever N seconds
 
     public static T GetRandomEnum<T>() where T : struct, IConvertible
     {

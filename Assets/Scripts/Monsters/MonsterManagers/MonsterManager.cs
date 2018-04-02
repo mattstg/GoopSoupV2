@@ -24,10 +24,8 @@ public class MonsterManager {
 
     public void CreateSpawner(Vector2 loc)
     {
-        GameObject mbObj =  GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/MonsterSpawners/" + monsterType.ToString() + "Spawner"));
-        mbObj.transform.position = loc;
-        monsterSpawner = mbObj.GetComponent<MonsterSpawner>();
-        monsterSpawner.InitializeMonsterSpawner(this, GV.Monster_Breed_Time, monsterType);
+        monsterSpawner = MonsterFactory.Instance.CreateMonsterSpawner(monsterType, this);
+        monsterSpawner.transform.position = loc;
     }
 
     public void AddMonster(Monster toAdd)
