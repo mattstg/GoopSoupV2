@@ -63,4 +63,10 @@ public class FlowManager  {
         }
         return toRet;
     }
+
+    public void SceneLoaded(UnityEngine.SceneManagement.Scene sceneLoaded, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode)
+    {
+        //Not used at the moment, but example of an event registered to listen to scene change
+        Debug.Log("Scene: " + sceneLoaded.name + " finished loading");
+    }
 }

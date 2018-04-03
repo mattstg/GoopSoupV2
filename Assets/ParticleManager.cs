@@ -69,6 +69,8 @@ public class ParticleManager
         MethodInfo castModuleMethod;
         MethodInfo castValueMethod;
 
+        MethodInfo getSetMethodInfo;
+
 
         public ValueSetter(PropertyInfo _pI, Type _moduleType)
         {
@@ -82,17 +84,13 @@ public class ParticleManager
                 voodoo = voodoo.MakeGenericMethod(new Type[] { moduleType, variableType });
 
                 setValueDelegate = voodoo.Invoke(this, new object[] { pI.GetSetMethod() });
-
-
+                getSetMethodInfo = pI.GetSetMethod();
+                
                 invokeSetterMethodInfo = typeof(ValueSetter).GetMethod("InvokeSetter");//, BindingFlags.Instance | BindingFlags.Public);
                 invokeSetterMethodInfo = invokeSetterMethodInfo.MakeGenericMethod(new Type[] { moduleType, variableType });
 
-                castModuleMethod = typeof(ValueSetter).GetMethod("Cast").MakeGenericMethod(moduleType);        //, BindingFlags.Instance | BindingFlags.Public
-                castValueMethod = typeof(ValueSetter).GetMethod("Cast").MakeGenericMethod(variableType);      //, BindingFlags.Instance | BindingFlags.Public
-
-
-                
-
+               //castModuleMethod = typeof(ValueSetter).GetMethod("Cast").MakeGenericMethod(moduleType);        //, BindingFlags.Instance | BindingFlags.Public
+               //castValueMethod = typeof(ValueSetter).GetMethod("Cast").MakeGenericMethod(variableType);      //, BindingFlags.Instance | BindingFlags.Public
 
             }
 
@@ -107,12 +105,18 @@ public class ParticleManager
         {
             //module = castModuleMethod.Invoke(this, new object[] { module });
             //newValue = castValueMethod.Invoke(this, new object[] { newValue });
-            invokeSetterMethodInfo.Invoke(this, new object[] { module, newValue });
+            //invokeSetterMethodInfo.Invoke(this, new object[] { module, newValue });
+            InvokeSetterType2(module, newValue);
         }
 
-        public T Cast<T>(object o)
+        //public T Cast<T>(object o)
+        //{
+        //    return (T)o;
+        //}
+
+        public void InvokeSetterType2(object module, object newValue)
         {
-            return (T)o;
+            getSetMethodInfo.Invoke(module, new object[] { newValue });
         }
 
         public void InvokeSetter<T, G>(T module, G newValue)
