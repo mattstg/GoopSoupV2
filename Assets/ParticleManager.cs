@@ -61,68 +61,73 @@ public class ParticleManager
         public class ValueSetter
         {
 
-            PropertyInfo pI;
-            Type variableType;
-            Type moduleType;
-            public object setValueDelegate;
-            MethodInfo invokeSetterMethodInfo;
-            MethodInfo castModuleMethod;
-            MethodInfo castValueMethod;
+        PropertyInfo pI;
+        Type variableType;
+        Type moduleType;
+        public object setValueDelegate;
+        MethodInfo invokeSetterMethodInfo;
+        MethodInfo castModuleMethod;
+        MethodInfo castValueMethod;
 
 
-            public ValueSetter(PropertyInfo _pI, Type _moduleType)
+        public ValueSetter(PropertyInfo _pI, Type _moduleType)
+        {
+            pI = _pI;
+            variableType = pI.PropertyType;
+            moduleType = _moduleType;
+
+            if (pI.GetSetMethod() != null)
             {
-                pI = _pI;
-                variableType = pI.PropertyType;
-                moduleType = _moduleType;
+                MethodInfo voodoo = typeof(ValueSetter).GetMethod("StrangeVoodoo");//, BindingFlags.Instance | BindingFlags.Public);          
+                voodoo = voodoo.MakeGenericMethod(new Type[] { moduleType, variableType });
 
-                if (pI.GetSetMethod() != null)
-                {
-                    MethodInfo voodoo = typeof(ValueSetter).GetMethod("StrangeVoodoo");//, BindingFlags.Instance | BindingFlags.Public);          
-                    voodoo = voodoo.MakeGenericMethod(new Type[] { moduleType, variableType });
+                setValueDelegate = voodoo.Invoke(this, new object[] { pI.GetSetMethod() });
 
-                    setValueDelegate = voodoo.Invoke(this, new object[] { pI.GetSetMethod() });
 
-                    invokeSetterMethodInfo = typeof(ValueSetter).GetMethod("InvokeSetter");//, BindingFlags.Instance | BindingFlags.Public);
-                    invokeSetterMethodInfo = invokeSetterMethodInfo.MakeGenericMethod(new Type[] { moduleType, variableType });
+                invokeSetterMethodInfo = typeof(ValueSetter).GetMethod("InvokeSetter");//, BindingFlags.Instance | BindingFlags.Public);
+                invokeSetterMethodInfo = invokeSetterMethodInfo.MakeGenericMethod(new Type[] { moduleType, variableType });
 
-                    castModuleMethod = typeof(ValueSetter).GetMethod("Cast").MakeGenericMethod(moduleType);        //, BindingFlags.Instance | BindingFlags.Public
-                    castValueMethod = typeof(ValueSetter).GetMethod("Cast").MakeGenericMethod(variableType);      //, BindingFlags.Instance | BindingFlags.Public
+                castModuleMethod = typeof(ValueSetter).GetMethod("Cast").MakeGenericMethod(moduleType);        //, BindingFlags.Instance | BindingFlags.Public
+                castValueMethod = typeof(ValueSetter).GetMethod("Cast").MakeGenericMethod(variableType);      //, BindingFlags.Instance | BindingFlags.Public
 
-                }
+
+                
+
 
             }
 
-            public Action<T, G> StrangeVoodoo<T, G>(MethodInfo mI)
-            {
-                return (Action<T, G>)Delegate.CreateDelegate(typeof(Action<T, G>), mI);
-            }
+        } 
 
-            public void SetValue(object module, object newValue)
-            {
-                //module = castModuleMethod.Invoke(this, new object[] { module });
-                //newValue = castValueMethod.Invoke(this, new object[] { newValue });
-                invokeSetterMethodInfo.Invoke(this, new object[] { module, newValue });
-            }
+        public Action<T, G> StrangeVoodoo<T, G>(MethodInfo mI)
+        {
+            return (Action<T, G>)Delegate.CreateDelegate(typeof(Action<T, G>), mI);
+        }
 
-            public T Cast<T>(object o)
-            {
-                return (T)o;
-            }
+        public void SetValue(object module, object newValue)
+        {
+            //module = castModuleMethod.Invoke(this, new object[] { module });
+            //newValue = castValueMethod.Invoke(this, new object[] { newValue });
+            invokeSetterMethodInfo.Invoke(this, new object[] { module, newValue });
+        }
 
-            public void InvokeSetter<T, G>(T module, G newValue)
+        public T Cast<T>(object o)
+        {
+            return (T)o;
+        }
+
+        public void InvokeSetter<T, G>(T module, G newValue)
+        {
+            try
             {
-                try
-                {
-                    ((Action<T, G>)setValueDelegate).Invoke(module, newValue);
-                }
-                catch(Exception e)
-                {
-                    string s = e.ToString();
-                    string ss = s;
-                }
+                ((Action<T, G>)setValueDelegate).Invoke(module, newValue);
+            }
+            catch(Exception e)
+            {
+                string s = e.ToString();
+                string ss = s;
             }
         }
+    }
 
 
         Dictionary<string, PropertyInfo> modulePropertyInfoByName = new Dictionary<string, PropertyInfo>();
