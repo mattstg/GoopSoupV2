@@ -19,4 +19,9 @@ public class Flow  {
     {
 
     }
+
+    public virtual void CloseFlow()
+    {
+
+    }
 }

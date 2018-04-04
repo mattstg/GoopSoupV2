@@ -37,6 +37,9 @@ public class Player : MonoBehaviour
 
     public void UpdatePlayer(float dt)
     {
+        if (Input.GetKeyDown(KeyCode.I))
+            HealthPopupManager.Instance.ModHP(transform, 2.5f);
+
         inputManager.UpdateManager(dt);
         InputManager.InputInfo inputInfo = inputManager.GetInputInfo();
         if(inputInfo.pickDropPressed)

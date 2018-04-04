@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class FlowManager  {
     public enum SceneNames { MainMenu, MainScene }
@@ -25,12 +26,14 @@ public class FlowManager  {
 
     public SceneNames currentScene;
     Flow currentFlow;
+    bool flowInitialized = false;
 
     public void InitializeFlowManager(SceneNames initialScene)
     {
         currentScene = initialScene;
         currentFlow = CreateFlow(initialScene);
-        currentFlow.InitializeFlow();
+        flowInitialized = true;
+        currentFlow.InitializeFlow();        
     }
 
     public void Update(float dt)
@@ -43,6 +46,14 @@ public class FlowManager  {
     {
         if (currentFlow != null)
             currentFlow.FixedUpdateFlow(dt);
+    }
+
+    public void ChangeFlows(SceneNames _flowToLoad)
+    {
+        flowInitialized = false;
+        currentFlow.CloseFlow();
+        currentFlow = CreateFlow(_flowToLoad);
+        SceneManager.sceneLoaded += SceneLoaded;
     }
 
     private Flow CreateFlow(SceneNames _flowToLoad)
@@ -64,9 +75,11 @@ public class FlowManager  {
         return toRet;
     }
 
-    public void SceneLoaded(UnityEngine.SceneManagement.Scene sceneLoaded, UnityEngine.SceneManagement.LoadSceneMode loadSceneMode)
+    public void SceneLoaded(Scene sceneLoaded, LoadSceneMode loadSceneMode)
     {
         //Not used at the moment, but example of an event registered to listen to scene change
         Debug.Log("Scene: " + sceneLoaded.name + " finished loading");
+        currentFlow.InitializeFlow();
+        SceneManager.sceneLoaded -= SceneLoaded; //Clear the event system
     }
 }

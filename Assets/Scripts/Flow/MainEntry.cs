@@ -8,7 +8,6 @@ public class MainEntry : MonoBehaviour {
     public void Initialize()
     {
         GameObject.DontDestroyOnLoad(gameObject);
-        UnityEngine.SceneManagement.SceneManager.sceneLoaded += FlowManager.Instance.SceneLoaded; //Add scene loaded 
         FlowManager.Instance.InitializeFlowManager((FlowManager.SceneNames)System.Enum.Parse(typeof(FlowManager.SceneNames), UnityEngine.SceneManagement.SceneManager.GetActiveScene().name));
     }
    
