@@ -5,10 +5,11 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour, IPoolable {
 
-    enum MonsterMode {Idle, Attacking, Moving }
+    enum MonsterMode {Idle, Attacking, Moving,  }
     MonsterMode monsterMode = MonsterMode.Idle;
     Rigidbody2D rb;
     Vector2 target;
+
     protected float monsterAggroRange;
     protected float monsterSpeed;
 
@@ -69,7 +70,15 @@ public class Monster : MonoBehaviour, IPoolable {
 
     }
 
+    public virtual void OnCollisionEnter(Collision2D coli)
+    {
 
+    }
+
+    public virtual void OnTriggerEnter2D(Collider2D coli)
+    {
+
+    }
 
     public void Pooled()
     {

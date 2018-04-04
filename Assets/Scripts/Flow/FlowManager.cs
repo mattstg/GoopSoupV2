@@ -38,13 +38,13 @@ public class FlowManager  {
 
     public void Update(float dt)
     {
-        if(currentFlow != null)
+        if(currentFlow != null && flowInitialized)
             currentFlow.UpdateFlow(dt);
     }
 
     public void FixedUpdate(float dt)
     {
-        if (currentFlow != null)
+        if (currentFlow != null && flowInitialized)
             currentFlow.FixedUpdateFlow(dt);
     }
 
@@ -80,6 +80,7 @@ public class FlowManager  {
         //Not used at the moment, but example of an event registered to listen to scene change
         Debug.Log("Scene: " + sceneLoaded.name + " finished loading");
         currentFlow.InitializeFlow();
+        flowInitialized = true;
         SceneManager.sceneLoaded -= SceneLoaded; //Clear the event system
     }
 }

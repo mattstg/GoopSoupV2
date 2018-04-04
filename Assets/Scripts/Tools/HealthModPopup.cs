@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class HealthModPopup : MonoBehaviour {
 
-    readonly float HEALTHPOPUP_TIME_MAX = 2; //If recieves no new ModValue calls by this amount of time, it closes off the instance
+    readonly float HEALTHPOPUP_LOCK_TIME = 2; //If recieves no new ModValue calls by this amount of time, it closes off the instance
     readonly float HEALTHPOPUP_FADE_TIME = 1.5f; //Time for text to fade away once launch on anim curve
-    readonly float HEALTHPOPUP_LERP_TIME = .75f; //Time it should take to lerp to final value
-    readonly float HEALTHPOPUP_LERP_MIN = .45f; //Min amount for lerp per second incase velo drops too low
+    readonly float HEALTHPOPUP_LERP_TIME = .5f; //Time it should take to lerp to final value
+    readonly float HEALTHPOPUP_LERP_MIN = .5f; //Min amount for lerp per second incase velo drops too low
     readonly Vector2 HEALTHPOPUP_OFFSET = new Vector2(0, .7f);
 
     public AnimationCurve animCurve;
@@ -21,13 +21,13 @@ public class HealthModPopup : MonoBehaviour {
     Vector3 popoffStartPoint;
 
     float currentVelo; //Used by smoothdamp function
-	
+
     void InitializeOnTarget(Transform _followTarget, float initialAmt)
     {
-        
+
         textmesh = GetComponent<TextMesh>();
         //Text mesh is a 3D object, only way to draw in front is to change the Z or to access the hidden Renderer on the TextMesh
-        textmesh.GetComponent<Renderer>().sortingLayerName = "UIText"; 
+        textmesh.GetComponent<Renderer>().sortingLayerName = "UIText";
         followTarget = _followTarget;
         offsetFromTarget = HEALTHPOPUP_OFFSET;
         finalValue = initialAmt;
@@ -44,12 +44,12 @@ public class HealthModPopup : MonoBehaviour {
 
     IEnumerator LerpModValue()
     {
-        while (curTimer < HEALTHPOPUP_FADE_TIME)
+        while (curTimer < HEALTHPOPUP_LOCK_TIME)
         {
             while ((curValue < finalValue && !Mathf.Approximately(curValue, finalValue)))
             {
                 curTimer = 0;
-                float newValue = Mathf.SmoothDamp(curValue, finalValue, ref currentVelo, HEALTHPOPUP_TIME_MAX);
+                float newValue = Mathf.SmoothDamp(curValue, finalValue, ref currentVelo, HEALTHPOPUP_LERP_TIME);
                 //Smooth damp sometimes never reaches it's target, since it slows down as it approaches target value
                 //so we do a comparision to see if the difference is too small, and have a min dif instead
                 float dif = newValue - curValue;   //Find the difference from smooth damp
