@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class Monster : MonoBehaviour, IPoolable {
 
+    public string spriteName;
+    
     enum MonsterMode {Idle, Attacking, Moving,  }
     MonsterMode monsterMode = MonsterMode.Idle;
     Rigidbody2D rb;
@@ -91,4 +93,9 @@ public class Monster : MonoBehaviour, IPoolable {
     }
 
     public GameObject GetGameObject { get { return gameObject; } }
+
+    public class BodyInfo
+    {
+        public float hp, accel, maxSpeed;
+    }
 }
