@@ -24,7 +24,7 @@ public class MonsterRandomSpawner  {
 
 
     float timeOfSummoning = 0;
-    float timeBetweenSummons = 7;
+    float timeBetweenSummons = 10;
 
 
     //Randomly summons a monster on the map, temporary measure until Monoliths are added
@@ -32,7 +32,7 @@ public class MonsterRandomSpawner  {
     {
         if(Time.time >= timeOfSummoning)
         {
-            MonsterFactory.Instance.CreateMonster("Slime", GV.GetRandomSpotInMap());
+            MonsterFactory.Instance.CreateMonster();            
             timeOfSummoning = Time.time + timeBetweenSummons;
         }
     }

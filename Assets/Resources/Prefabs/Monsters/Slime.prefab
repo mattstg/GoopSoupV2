@@ -57,12 +57,12 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!58 &58407830535572430
 CircleCollider2D:
   m_ObjectHideFlags: 1
@@ -89,22 +89,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c85432dd9fba0a49b1ec037b9ea14e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteName: 
   ingredientValue:
     r: 0
     g: 0
     b: 0
   bodyInfo:
-    maxHp: 0
-    accel: 0
-    maxSpeed: 0
+    maxHp: 1
+    accel: 0.2
+    maxSpeed: 1
     hp: 0
   animInfo:
-    spriteName: 
-    animationSpeed: 1
+    spriteName: Slime
+    animationSpeed: 0.1
   aiInfo:
-    aggroRange: 0
-    attentionSpan: 0
+    aggroRange: 5
+    attentionSpan: 2
 --- !u!212 &212960293101947974
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -147,5 +146,5 @@ SpriteRenderer:
   m_Size: {x: 0.8, y: 0.8}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0

@@ -19,6 +19,10 @@ public class MonsterFactory {
     }
     #endregion
 
+    Dictionary<string, GameObject> monsterPrefabDict;
+
+    string monsterPrefabPath = "Prefabs/Monsters/";
+    string[] monsterNames;
     int monsterLayer;
 
     private MonsterFactory()
@@ -26,6 +30,77 @@ public class MonsterFactory {
         monsterLayer = LayerMask.NameToLayer("Monster");
     }
 
+    public void InitializeFactory()
+    {
+        //Loads all prefabs into the factory
+        monsterPrefabDict = new Dictionary<string, GameObject>();
+        GameObject[] allPrefabs = Resources.LoadAll<GameObject>(monsterPrefabPath);
+        foreach (GameObject prefab in allPrefabs)
+        {
+            //Safety checks, did they create the monster properly?  
+            Monster newMonster = prefab.GetComponent<Monster>();
+            if (newMonster)
+            {
+                if (!newMonster.CompareTag("Monster"))
+                    Debug.Log("Monster: " + prefab.name + " used the tag: " + newMonster.tag + " instead of Monster, was that on purpose?");
+                if (newMonster.gameObject.layer != monsterLayer)
+                    Debug.Log("Monster: " + prefab.name + " used the layer: " + LayerMask.LayerToName(newMonster.gameObject.layer) + " instead of Monster, was that on purpose?");
+                if (!newMonster.GetComponent<Collider2D>())
+                    Debug.Log("Monster: " + prefab.name + " does not have a collider was that on purpose?");
+
+                //Setup the Rigidbody - If a developer wants a different setup, this would not allow it, so must be careful and mention this in meetings
+                Rigidbody2D rb = newMonster.GetComponent<Rigidbody2D>();
+                rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+                rb.gravityScale = 0;
+
+                monsterPrefabDict.Add(prefab.name, prefab);
+            }
+            else
+            {
+                Debug.Log("A prefab inside of Assets/Resources/" + monsterPrefabPath + " did not have a monster script, only have monster prefabs in this folder! prefab name: " + prefab.name);
+            }
+        }
+
+        List<string> tempList = new List<string>(monsterPrefabDict.Keys);
+        monsterNames = tempList.ToArray();
+    }
+
+
+    //External calls used by the other developers, I include may overloads for ease of use.
+
+    /// <summary>
+    /// Creates a random monster at random location
+    /// </summary>
+    public Monster CreateMonster()
+    {
+        string monsterName = GV.GetRandomElemFromArr<string>(monsterNames);
+        Vector2 location = GV.GetRandomSpotInMap();
+        return CreateMonster(monsterName, location);
+    }
+
+    /// <summary>
+    /// Creates named monster at random location
+    /// </summary>
+    public Monster CreateMonster(string monsterName)
+    {
+        Vector2 location = GV.GetRandomSpotInMap();
+        return CreateMonster(monsterName, location);
+    }
+
+    /// <summary>
+    /// Creates random monster at given location
+    /// </summary>
+    public Monster CreateMonster(Vector2 loc)
+    {
+        string monsterName = GV.GetRandomElemFromArr<string>(monsterNames);
+        return CreateMonster(monsterName, loc);
+    }
+
+
+    //Main function used by everyone and by the functions above
+    /// <summary>
+    /// Creates a monster of given name at the location
+    /// </summary>
     public Monster CreateMonster(string monsterName, Vector2 loc)
     {
         GameObject toRetObj = null;
@@ -33,39 +108,34 @@ public class MonsterFactory {
         if (poolable != null)
             toRetObj = poolable.GetGameObject;
         else
-            toRetObj = CreateMonster(monsterName).gameObject;
+            toRetObj = _CreateMonster(monsterName).gameObject;
         Monster toRet = toRetObj.GetComponent<Monster>();
         if (!toRet)
             Debug.LogError("Something went wrong in monster factory, object: " + toRetObj.name + " did not contain a monster script. Returning Null");
         else
+        {
             toRet.transform.position = loc;
+            MonsterManager.Instance.AddMonster(toRet);
+        }
+
         return toRet;
     }
 
-    private Monster CreateMonster(string monsterName)
+
+    //Internal call, used by the factory
+    private Monster _CreateMonster(string monsterName)
     {
-        GameObject newMonsterObj = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Monsters/" + monsterName));
-        if(!newMonsterObj)
+        if(!monsterPrefabDict.ContainsKey(monsterName))
         {
-            Debug.LogError("Monster of name: " + monsterName + " in the folder: Resources/Prefabs/Monsters/");
+            Debug.LogError("Monster of name: " + monsterName + " not found in monsterDict");
             return null;
         }
+
+        GameObject newMonsterObj = GameObject.Instantiate(monsterPrefabDict[monsterName]);
         newMonsterObj.name = monsterName; //To remove the (Clone) part
         Monster newMonster = newMonsterObj.GetComponent<Monster>();
+        AnimationFactory.Instance.SetupAnimationForMonster(newMonster);
 
-        //Safety checks, did they create the monster properly? This could be annoying if it pops up all the time though, 
-        //so we'll need to fix that in the future. But safety is important for early stages
-        if (!newMonster.CompareTag("Monster"))
-            Debug.Log("Monster: " + monsterName + " used the tag: " + newMonster.tag + " instead of Monster, was that on purpose?");
-        if (newMonster.gameObject.layer != monsterLayer)
-            Debug.Log("Monster: " + monsterName + " used the layer: " + LayerMask.LayerToName(newMonster.gameObject.layer) + " instead of Monster, was that on purpose?");
-        if(!newMonster.GetComponent<Collider2D>())
-            Debug.Log("Monster: " + monsterName + " does not have a collider was that on purpose?");
-
-        //Setup the Rigidbody - If a developer wants a different setup, this would not allow it, so must be careful and mention this in meetings
-        Rigidbody2D rb = newMonster.GetComponent<Rigidbody2D>();
-        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
-        rb.gravityScale = 0;
 
         //Setup the animation clip - We dont want to have to create an animation clip for EVERY monster we make, that'd be boring. Also, we don't want
         //to call resources load every time, so were going to store it
@@ -95,14 +165,12 @@ public class MonsterFactory {
             anim.Play();
         }*/
 
-        
+
 
         //Setup the AI
         //Atm there is only one type of AI (State machine), so we will initialize that inside of Monster
 
         newMonster.Initialize();
-
-
         return newMonster;
         /*
         SpriteRenderer sr = newMonster.AddComponent<SpriteRenderer>();

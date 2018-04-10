@@ -6,13 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D),typeof(SpriteRenderer))]
 public class Monster : MonoBehaviour, IPoolable {
 
-    public string spriteName;
-	public enum State { Enter, Update, Exit }
-    enum MonsterMode {Idle, Attacking, Moving}
-    MonsterMode monsterMode = MonsterMode.Idle;
+	
 	MonsterAI ai;
     Rigidbody2D rb;
-    Vector2 target;
 
     [Tooltip("Ingredient value of the creature")]
     public ColorInit ingredientValue;
@@ -31,121 +27,6 @@ public class Monster : MonoBehaviour, IPoolable {
         ai.UpdateParameters(dt); //This code updates the AI, who in turn calls BehaviourCall
 	}
 
-	public virtual void BehaviourCall(string name, State state)
-    {
-		switch (name)
-        {
-		case "Idle":
-			Idle (state);
-			break;
-		case "Die":
-			Die (state);
-			break;
-		case "AttackTarget":
-			AttackTarget (state);
-			break;
-		case "ChaseTarget":
-			ChaseTarget (state);
-			break;
-		case "Wander":
-			Wander (state);
-			break;
-		default:
-			Debug.Log ("Your Behaviour dosn't match any known Behaviour.");
-			break;
-        }
-    }
-
-	protected virtual void Idle(State state)
-	{
-		switch (state) {
-		case State.Enter:
-			//enter stuff
-			break;
-		case State.Update:
-			//update stuff
-			break;
-		case State.Exit:
-			//exit stuff
-			break;
-		default:
-			Debug.Log ("You seem to have taken a wrong turn.");
-			break;
-		}
-	}
-
-	protected virtual void Die(State state)
-	{
-		switch (state) {
-		case State.Enter:
-			//enter stuff
-			break;
-		case State.Update:
-			//update stuff
-			break;
-		case State.Exit:
-			//exit stuff
-			break;
-		default:
-			Debug.Log ("You seem to have taken a wrong turn.");
-			break;
-		}
-	}
-
-	protected virtual void AttackTarget(State state)
-	{
-		switch (state) {
-		case State.Enter:
-			//enter stuff
-			break;
-		case State.Update:
-			//update stuff
-			break;
-		case State.Exit:
-			//exit stuff
-			break;
-		default:
-			Debug.Log ("You seem to have taken a wrong turn.");
-			break;
-		}
-	}
-
-	protected virtual void ChaseTarget(State state)
-	{
-		switch (state) {
-		case State.Enter:
-			//enter stuff
-			break;
-		case State.Update:
-			//update stuff
-			break;
-		case State.Exit:
-			//exit stuff
-			break;
-		default:
-			Debug.Log ("You seem to have taken a wrong turn.");
-			break;
-		}
-	}
-
-	protected virtual void Wander(State state)
-	{
-		switch (state) {
-		case State.Enter:
-			//enter stuff
-			break;
-		case State.Update:
-			//update stuff
-			break;
-		case State.Exit:
-			//exit stuff
-			break;
-		default:
-			Debug.Log ("You seem to have taken a wrong turn.");
-			break;
-		}
-	}
-
 	public virtual void OnCollisionEnter2D(Collision2D coli)
 	{
 
@@ -158,28 +39,35 @@ public class Monster : MonoBehaviour, IPoolable {
 
 	public void Pooled()
 	{
-		//Turn off things that matter, like animation
+        bodyInfo.hp = bodyInfo.maxHp;
+        rb.velocity = new Vector2();
 	}
 
 	public void DePooled()
 	{
-		//Set active again, turn on anim and reset values and etc
+        //Set active again, turn on anim and reset values and etc
+        ai.Depooled();
 	}
 
 	public GameObject GetGameObject { get { return gameObject; } }
 
-    protected virtual void MoveUpdate(Vector2 targetPos)
+
+    public void MoveTowards(Vector2 targetPos)
     {
-        if (Vector2.Distance(transform.position, targetPos) < .2f)
-        {
-            monsterMode = MonsterMode.Idle;
-            rb.velocity = new Vector2();
-        }
-        else
+        if (Vector2.Distance(transform.position, targetPos) > GV.Monster_Move_TargetReachDist)
         {
             Vector2 goalDir = targetPos - (Vector2)transform.position;
             rb.velocity = goalDir.normalized * bodyInfo.maxSpeed;
-        }        
+        }
+        else
+        {
+            rb.velocity = new Vector2();
+        }
+    }
+
+    public void ClearVelocity()
+    {
+        rb.velocity = new Vector2();
     }
 
     //Custom animation system, since legacy system doesnt handle Sprite changes well
@@ -188,13 +76,17 @@ public class Monster : MonoBehaviour, IPoolable {
 
     }
 
+    public void MonsterDies()
+    {
+        MonsterManager.Instance.RemoveMonster(this);
 
+    }
    
     [System.Serializable]
     public class BodyInfo
     {
         public float maxHp, accel, maxSpeed;
-        [HideInInspector] public float hp;
+        public float hp;
 
     }
 
@@ -202,8 +94,8 @@ public class Monster : MonoBehaviour, IPoolable {
     public class AnimInfo
     {
         public string spriteName;
-        [Tooltip("Time to preform one anim full loop")]
-        public float animationSpeed = 1;
+        [Tooltip("Animation time for each keyframe")]
+        public float animationSpeed = .2f;
     }
 
     [System.Serializable]

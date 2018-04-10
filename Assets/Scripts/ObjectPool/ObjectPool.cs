@@ -37,7 +37,6 @@ public class ObjectPool  {
         poolable.GetGameObject.transform.SetParent(objectPoolParent);
         poolable.GetGameObject.SetActive(false);
         poolable.Pooled(); //Just in case the object wants to be alerted
-
     }
 
     public IPoolable RetrieveFromPool(string objectName)
@@ -46,7 +45,7 @@ public class ObjectPool  {
         {
             IPoolable toRet = pooledObjects[objectName].Pop();
             toRet.GetGameObject.transform.SetParent(null);
-            toRet.GetGameObject.SetActive(false);
+            toRet.GetGameObject.SetActive(true);
             toRet.DePooled();  //Just in case the object wants to be alerted
             return toRet;
         }

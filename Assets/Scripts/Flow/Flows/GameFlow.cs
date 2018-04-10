@@ -8,14 +8,14 @@ public class GameFlow : Flow {
 	public override void InitializeFlow()
     {
         PlayerManager.Instance.Initialize();
-        MonsterManagerMaster.Instance.InitializeInitialMonsterManagers();
+        MonsterFactory.Instance.InitializeFactory();
     }
 
     public override void UpdateFlow(float dt)
     {
         PlayerManager.Instance.Update(dt);
-        MonsterManagerMaster.Instance.UpdateMonsterManagers(dt);
         MonsterRandomSpawner.Instance.Update(dt);
+        MonsterManager.Instance.UpdateMonsterManager(dt);
     }
 
     public override void FixedUpdateFlow(float dt)

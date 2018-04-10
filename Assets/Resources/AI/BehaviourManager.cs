@@ -4,32 +4,42 @@ using UnityEngine;
 
 public class BehaviourManager  {
 	//must be all the animation names which have behaviour scripts
-	static string[] stateName = {"Idle","Die","AttackTarget","ChaseTarget","Wander"};
+	
 	private Dictionary<int,string> hashToName = new Dictionary<int, string>();
 	StateMachineBehaviour[] behaviour;
 	Animator anim;
-	Monster monster;
+	MonsterAI monsterAI;
 
-	public BehaviourManager(Animator _anim, Monster _monster){
+	public BehaviourManager(Animator _anim, MonsterAI _monsterAI){
 		anim = _anim;
-		monster = _monster;
+        monsterAI = _monsterAI;
 		behaviour = anim.GetBehaviours<GenericBehaviour> ();
 		foreach(GenericBehaviour gb in behaviour)
 			gb.Initialize (this);
 
-        foreach (string s in stateName)
+        foreach (string s in MonsterAI.stateNames)
             hashToName.Add(Animator.StringToHash(s), s);
 	}
+
+    //When the game object is turned off, generic behaviours some reason lose thier links? Maybe a weird mono : StateMachineBehaviour thing?
+    //So when brought off the pool, need to link again
+    public void Depooled()
+    {
+        //There be me a memory leak here!!! GenericBehaviours seem to change when re-enabled, but the old ones still exist?
+        behaviour = anim.GetBehaviours<GenericBehaviour>();
+        foreach (GenericBehaviour gb in behaviour)
+            gb.Initialize(this);
+    }
 
 	private string GetName(int nameHash){
 		return hashToName [nameHash];
 	}
 
-	public void BehaviourOutput(Monster.State state, int hash){
+	public void BehaviourOutput(BaseState.StateFunction state, int hash){
 		string name = GetName(hash);
-        monster.BehaviourCall(name, state);
+        monsterAI.BehaviourCall(name, state);
 
 
-        Debug.Log ("State Name: " + name + ". Current phase: " + state.ToString());
+        //Debug.Log ("State Name: " + name + ". Current phase: " + state.ToString());
 	}
 }
