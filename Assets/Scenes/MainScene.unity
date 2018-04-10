@@ -5614,6 +5614,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0de93128e72770c4895988b5576e543b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  spriteName: 
+  ingredientValue:
+    r: 0
+    g: 0
+    b: 0
+  bodyInfo:
+    maxHp: 0
+    accel: 0
+    maxSpeed: 0
+    hp: 0
+  animInfo:
+    spriteName: 
+    animationSpeed: 1
+  aiInfo:
+    aggroRange: 0
+    attentionSpan: 0
 --- !u!1 &762477316
 GameObject:
   m_ObjectHideFlags: 0

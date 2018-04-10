@@ -27,7 +27,7 @@ public class MonsterManagerMaster {
 
     public void InitializeInitialMonsterManagers() { } //Empty for now
     
-
+    /*
     /// <summary>
     /// This function creates a monster breeder and a manager to match with it
     /// </summary>
@@ -42,7 +42,7 @@ public class MonsterManagerMaster {
             mm.CreateSpawner(loc);
             monsterManagers.Add(randMonsterType, mm);
         }
-    }
+    }*/
 
     public void UpdateMonsterManagers(float dt)
     {

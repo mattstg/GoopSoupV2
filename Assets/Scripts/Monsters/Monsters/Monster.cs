@@ -3,38 +3,32 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D),typeof(SpriteRenderer))]
 public class Monster : MonoBehaviour, IPoolable {
 
     public string spriteName;
-    
 	public enum State { Enter, Update, Exit }
-    enum MonsterMode {Idle, Attacking, Moving,  }
+    enum MonsterMode {Idle, Attacking, Moving}
     MonsterMode monsterMode = MonsterMode.Idle;
 	MonsterAI ai;
     Rigidbody2D rb;
     Vector2 target;
-	float hp = 100;
 
-	bool seePlayer, attackRange;
-
-    protected float monsterAggroRange;
-	protected float monsterAttachRange;
-    protected float monsterSpeed;
+    [Tooltip("Ingredient value of the creature")]
+    public ColorInit ingredientValue;
+    public BodyInfo bodyInfo;
+    public AnimInfo animInfo;
+    public AIInfo aiInfo;
 
     public virtual void Initialize()
     {
+        bodyInfo.hp = bodyInfo.maxHp;
         rb = GetComponent<Rigidbody2D>();
-		ai = new MonsterAI (this);
+		ai = new MonsterAI (this);          //Atm there is only one kind of AI, so it is just initalized in here
     }
 
 	public virtual void UpdateMonster(float dt){
-		float distance = Vector2.Distance (PlayerManager.Instance.player.transform.position, transform.position);
-		seePlayer = distance < monsterAggroRange;
-		attackRange = distance < monsterAttachRange;
-		ai.Refresh (dt, seePlayer, attackRange);
-
-		if (hp <= 0)
-			ai.Dies ();
+        ai.UpdateParameters(dt); //This code updates the AI, who in turn calls BehaviourCall
 	}
 
 	public virtual void BehaviourCall(string name, State state)
@@ -184,13 +178,44 @@ public class Monster : MonoBehaviour, IPoolable {
         else
         {
             Vector2 goalDir = targetPos - (Vector2)transform.position;
-            rb.velocity = goalDir.normalized * monsterSpeed;
-        }
-        
+            rb.velocity = goalDir.normalized * bodyInfo.maxSpeed;
+        }        
     }
+
+    //Custom animation system, since legacy system doesnt handle Sprite changes well
+    private void BeginAnimations()
+    {
+
+    }
+
+
    
+    [System.Serializable]
     public class BodyInfo
     {
-        public float hp, accel, maxSpeed;
+        public float maxHp, accel, maxSpeed;
+        [HideInInspector] public float hp;
+
+    }
+
+    [System.Serializable]
+    public class AnimInfo
+    {
+        public string spriteName;
+        [Tooltip("Time to preform one anim full loop")]
+        public float animationSpeed = 1;
+    }
+
+    [System.Serializable]
+    public class AIInfo
+    {
+        public float aggroRange, attentionSpan;
+    }
+
+    //This class is just that R-G-B appears in the unity editor, instead of a color selection panel
+    [System.Serializable]
+    public class ColorInit
+    {
+        public float r, g, b;
     }
 }

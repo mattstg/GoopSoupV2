@@ -5,7 +5,7 @@ using UnityEngine;
 public class MonsterManager {
 
     protected string breederPrefabName;
-    MonsterSpawner monsterSpawner;
+    //MonsterSpawner monsterSpawner;
     List<Monster> monsterList;
     GV.MonsterTypes monsterType;
 
@@ -17,15 +17,15 @@ public class MonsterManager {
 
     public void UpdateMonsterManager(float dt)
     {
-        monsterSpawner.UpdateMonsterSpawner(dt);
+        //monsterSpawner.UpdateMonsterSpawner(dt);
         foreach (Monster m in monsterList)
             m.UpdateMonster(dt);
     }
 
     public void CreateSpawner(Vector2 loc)
     {
-        monsterSpawner = MonsterFactory.Instance.CreateMonsterSpawner(monsterType, this);
-        monsterSpawner.transform.position = loc;
+        //monsterSpawner = MonsterFactory.Instance.CreateMonsterSpawner(monsterType.ToStrin, this);
+        //monsterSpawner.transform.position = loc;
     }
 
     public void AddMonster(Monster toAdd)

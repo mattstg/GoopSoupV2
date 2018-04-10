@@ -17,8 +17,8 @@ public class BehaviourManager  {
 		foreach(GenericBehaviour gb in behaviour)
 			gb.Initialize (this);
 
-		foreach (string s in stateName)
-			hashToName.Add (Animator.StringToHash (s), s);
+        foreach (string s in stateName)
+            hashToName.Add(Animator.StringToHash(s), s);
 	}
 
 	private string GetName(int nameHash){
@@ -27,7 +27,9 @@ public class BehaviourManager  {
 
 	public void BehaviourOutput(Monster.State state, int hash){
 		string name = GetName(hash);
+        monster.BehaviourCall(name, state);
 
-		Debug.Log ("State Name: " + name + ". Current phase: " + state.ToString());
+
+        Debug.Log ("State Name: " + name + ". Current phase: " + state.ToString());
 	}
 }

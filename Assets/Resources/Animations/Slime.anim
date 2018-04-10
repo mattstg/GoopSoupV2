@@ -5,7 +5,7 @@ AnimationClip:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: Slime_Move
+  m_Name: Slime
   serializedVersion: 6
   m_Legacy: 0
   m_Compressed: 0
@@ -18,23 +18,23 @@ AnimationClip:
   m_FloatCurves: []
   m_PPtrCurves:
   - curve:
-    - time: 0
+    - time: 0.033333335
       value: {fileID: 21300032, guid: fc357f5b054047f46b2d159d59216642, type: 3}
-    - time: 0.06666667
+    - time: 0.16666667
       value: {fileID: 21300034, guid: fc357f5b054047f46b2d159d59216642, type: 3}
-    - time: 0.15
-      value: {fileID: 21300036, guid: fc357f5b054047f46b2d159d59216642, type: 3}
-    - time: 0.23333333
-      value: {fileID: 21300038, guid: fc357f5b054047f46b2d159d59216642, type: 3}
     - time: 0.3
+      value: {fileID: 21300036, guid: fc357f5b054047f46b2d159d59216642, type: 3}
+    - time: 0.4
+      value: {fileID: 21300038, guid: fc357f5b054047f46b2d159d59216642, type: 3}
+    - time: 0.53333336
       value: {fileID: 21300040, guid: fc357f5b054047f46b2d159d59216642, type: 3}
-    - time: 0.38333333
+    - time: 0.6666667
       value: {fileID: 21300042, guid: fc357f5b054047f46b2d159d59216642, type: 3}
-    - time: 0.45
+    - time: 0.76666665
       value: {fileID: 21300044, guid: fc357f5b054047f46b2d159d59216642, type: 3}
-    - time: 0.51666665
+    - time: 0.9
       value: {fileID: 21300046, guid: fc357f5b054047f46b2d159d59216642, type: 3}
-    - time: 0.6166667
+    - time: 1.0333333
       value: {fileID: 21300048, guid: fc357f5b054047f46b2d159d59216642, type: 3}
     attribute: m_Sprite
     path: 
@@ -69,7 +69,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.6333333
+    m_StopTime: 1.05
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -89,4 +89,25 @@ AnimationClip:
   m_HasGenericRootTransform: 0
   m_HasMotionFloatCurves: 0
   m_GenerateMotionCurves: 0
-  m_Events: []
+  m_Events:
+  - time: 0.11666667
+    functionName: 
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.11666667
+    functionName: 
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.11666667
+    functionName: 
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0

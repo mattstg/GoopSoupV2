@@ -8,6 +8,7 @@ public class MonsterSpawner : MonoBehaviour {
     SpawnerInfo spawnerInfo;
     MonsterInfo monsterCreates;
     float timeTillNextBreed;
+    static readonly float MONOLITH_SPAWN_DISTANCE_MAX = 3;
 
     public void LinkMonsterManager()
     {
@@ -32,9 +33,8 @@ public class MonsterSpawner : MonoBehaviour {
 
     public virtual void SpawnMonster()
     {
-        Monster spawnedMonster = MonsterFactory.Instance.CreateMonster(monsterCreates.monsterType);
-        spawnedMonster.Initialize();
-        spawnedMonster.transform.position = transform.position + Random.onUnitSphere * 3;
+        Vector2 loc = transform.position + Random.onUnitSphere * MONOLITH_SPAWN_DISTANCE_MAX;
+        Monster spawnedMonster = MonsterFactory.Instance.CreateMonster(monsterCreates.monsterType.ToString(), loc);
         monsterManager.AddMonster(spawnedMonster);
     }
 

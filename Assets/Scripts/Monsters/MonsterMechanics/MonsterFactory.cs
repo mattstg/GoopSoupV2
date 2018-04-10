@@ -19,8 +19,120 @@ public class MonsterFactory {
     }
     #endregion
 
-    //Used for storing System.Types, can be used to AddComponents to objects
+    int monsterLayer;
+
+    private MonsterFactory()
+    {
+        monsterLayer = LayerMask.NameToLayer("Monster");
+    }
+
+    public Monster CreateMonster(string monsterName, Vector2 loc)
+    {
+        GameObject toRetObj = null;
+        IPoolable poolable = ObjectPool.Instance.RetrieveFromPool(monsterName); //atm pool is not functional, will always return null
+        if (poolable != null)
+            toRetObj = poolable.GetGameObject;
+        else
+            toRetObj = CreateMonster(monsterName).gameObject;
+        Monster toRet = toRetObj.GetComponent<Monster>();
+        if (!toRet)
+            Debug.LogError("Something went wrong in monster factory, object: " + toRetObj.name + " did not contain a monster script. Returning Null");
+        else
+            toRet.transform.position = loc;
+        return toRet;
+    }
+
+    private Monster CreateMonster(string monsterName)
+    {
+        GameObject newMonsterObj = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Monsters/" + monsterName));
+        if(!newMonsterObj)
+        {
+            Debug.LogError("Monster of name: " + monsterName + " in the folder: Resources/Prefabs/Monsters/");
+            return null;
+        }
+        newMonsterObj.name = monsterName; //To remove the (Clone) part
+        Monster newMonster = newMonsterObj.GetComponent<Monster>();
+
+        //Safety checks, did they create the monster properly? This could be annoying if it pops up all the time though, 
+        //so we'll need to fix that in the future. But safety is important for early stages
+        if (!newMonster.CompareTag("Monster"))
+            Debug.Log("Monster: " + monsterName + " used the tag: " + newMonster.tag + " instead of Monster, was that on purpose?");
+        if (newMonster.gameObject.layer != monsterLayer)
+            Debug.Log("Monster: " + monsterName + " used the layer: " + LayerMask.LayerToName(newMonster.gameObject.layer) + " instead of Monster, was that on purpose?");
+        if(!newMonster.GetComponent<Collider2D>())
+            Debug.Log("Monster: " + monsterName + " does not have a collider was that on purpose?");
+
+        //Setup the Rigidbody - If a developer wants a different setup, this would not allow it, so must be careful and mention this in meetings
+        Rigidbody2D rb = newMonster.GetComponent<Rigidbody2D>();
+        rb.constraints = RigidbodyConstraints2D.FreezeRotation;
+        rb.gravityScale = 0;
+
+        //Setup the animation clip - We dont want to have to create an animation clip for EVERY monster we make, that'd be boring. Also, we don't want
+        //to call resources load every time, so were going to store it
+        /*AnimationClip ac = null;
+        string spriteName = newMonster.animInfo.spriteName;
+
+        if (!animClipDict.ContainsKey(spriteName))
+        {
+            Sprite[] subSprites = Resources.LoadAll<Sprite>("Sprites/Monsters/" + spriteName);
+            if (subSprites == null || subSprites.Length == 0)
+            {
+                Debug.LogError("Monster: " + monsterName + " had the spriteName defined in bodyInfo as: " + spriteName + " on the prefab, but could not find the spriteSheet in: Resources/Sprites/Monsters/");
+            }
+            else
+            {
+                ac = CreateAnimationClip(subSprites, newMonster.animInfo.animationSpeed);
+                animClipDict.Add(spriteName, ac);
+            }
+        }
+
+        //If no animation clip, will just use the sprite they attached
+        if (ac)
+        {
+            Animation anim = newMonsterObj.AddComponent<Animation>();
+            anim.clip = ac;
+            anim.wrapMode = WrapMode.Loop;
+            anim.Play();
+        }*/
+
+        
+
+        //Setup the AI
+        //Atm there is only one type of AI (State machine), so we will initialize that inside of Monster
+
+        newMonster.Initialize();
+
+
+        return newMonster;
+        /*
+        SpriteRenderer sr = newMonster.AddComponent<SpriteRenderer>();
+        sr.sprite = Resources.Load<Sprite>("Sprites/Monsters/" + monsterName);
+        sr.sortingLayerName = "Monster";
+        newMonster.AddComponent<BoxCollider2D>();
+        */
+    }
+
+    /* The old factory would create everything by using parameters in code. This allows us to randomly generate hundreds of enemies easily, but makes it
+    ** harder to use for non-developers (Game Designers). The new factory system will take advatange of Unity's public editor variables so making enemies is easy
+    ** but still very generic to minimize time and knowledge it takes to add a new enemy
+    */
+    #region Old Factory
+    /*
     Dictionary<GV.MonsterTypes, MonsterInfoPair> typeOfMonsterDict;
+
+     public Monster CreateMonster(GV.MonsterTypes monsterType)
+    {
+        GameObject toRetObj = null;
+        IPoolable poolable = ObjectPool.Instance.RetrieveFromPool(monsterType.ToString());
+        if (poolable != null)
+            toRetObj = poolable.GetGameObject;
+        else
+            toRetObj = CreateMonsterComplex(monsterType);
+        Monster toRet = toRetObj.GetComponent<Monster>();
+        if (!toRet)
+            Debug.LogError("Something went wrong in monster factory, object: " + toRetObj.name + " did not contain a monster script. Returning Null");
+        return toRet;
+    }
 
     private MonsterFactory()
     {
@@ -46,21 +158,6 @@ public class MonsterFactory {
         }
     }
 
-
-    public Monster CreateMonster(GV.MonsterTypes monsterType)
-    {
-        GameObject toRetObj = null;
-        IPoolable poolable = ObjectPool.Instance.RetrieveFromPool(monsterType.ToString());
-        if (poolable != null)
-            toRetObj = poolable.GetGameObject;
-        else
-            toRetObj = CreateMonsterComplex(monsterType);
-        Monster toRet = toRetObj.GetComponent<Monster>();
-        if (!toRet)
-            Debug.LogError("Something went wrong in monster factory, object: " + toRetObj.name + " did not contain a monster script. Returning Null");
-        return toRet;
-    }
-
     public MonsterSpawner CreateMonsterSpawner(GV.MonsterTypes monsterType, MonsterManager monsterManager)
     {
         string spawnerName = monsterType.ToString() + "Spawner";
@@ -81,14 +178,14 @@ public class MonsterFactory {
         sr.sortingLayerName = "Spawner";
 
         //Only if moving 
-        if(spawnerInfo.movespeed != 0)
+        if (spawnerInfo.movespeed != 0)
         {
             Rigidbody2D rb = spawnerObj.AddComponent<Rigidbody2D>();
             rb.constraints = RigidbodyConstraints2D.FreezeRotation;
             rb.gravityScale = 0;
         }
 
-        
+
         spawnerObj.AddComponent<BoxCollider2D>();
         MonsterSpawner mspawner = spawnerObj.AddComponent<MonsterSpawner>();
         mspawner.InitializeMonsterSpawner(spawnerInfo, typeOfMonsterDict[monsterType].monsterInfo, monsterManager);
@@ -97,15 +194,15 @@ public class MonsterFactory {
     }
 
 
-    /*private GameObject CreateMonsterSimple(string monsterName)
+    private GameObject CreateMonsterSimple(string monsterName)
     {
         return GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Monsters/" + monsterName));
-    }*/
+    }
 
     private GameObject CreateMonsterComplex(GV.MonsterTypes monsterType)
     {
         string monsterName = monsterType.ToString();
-        if(!typeOfMonsterDict.ContainsKey(monsterType))
+        if (!typeOfMonsterDict.ContainsKey(monsterType))
         {
             Debug.LogError("CreateMonsterComplex could not find monster: " + monsterName + " in the typeOfMonsterDict");
             return null;
@@ -128,11 +225,6 @@ public class MonsterFactory {
         //AnimationClip auto generate        
         return newMonster;
     }
-
-    private GameObject CreateMonsterAdvanced(string monsterName)
-    {
-        //This will use the auto class generator which will be covered at a later date (Course 3)
-        return null;
-    }
-
+    */
+    #endregion
 }
