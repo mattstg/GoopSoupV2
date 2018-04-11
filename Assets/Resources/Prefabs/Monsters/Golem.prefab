@@ -110,7 +110,7 @@ MonoBehaviour:
     hp: 0
   animInfo:
     spriteName: Golem
-    animationSpeed: 0.05
+    animationSpeed: 0.6
   aiInfo:
     aggroRange: 2
     attentionSpan: 6
