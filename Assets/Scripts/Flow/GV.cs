@@ -31,7 +31,7 @@ public class GV {
 
     public static Vector2 GetRandomSpotNear(Vector2 location, float maxDistance)
     {
-        return UnityEngine.Random.insideUnitCircle * maxDistance;
+        return location + UnityEngine.Random.insideUnitCircle * maxDistance;
     }
 
     /// <summary>
