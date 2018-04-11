@@ -48,6 +48,7 @@ public class MonsterFactory {
                 if (!newMonster.GetComponent<Collider2D>())
                     Debug.Log("Monster: " + prefab.name + " does not have a collider was that on purpose?");
 
+                newMonster.GetComponent<SpriteRenderer>().sortingLayerName = "Monster";
                 //Setup the Rigidbody - If a developer wants a different setup, this would not allow it, so must be careful and mention this in meetings
                 Rigidbody2D rb = newMonster.GetComponent<Rigidbody2D>();
                 rb.constraints = RigidbodyConstraints2D.FreezeRotation;
@@ -137,47 +138,11 @@ public class MonsterFactory {
         AnimationFactory.Instance.SetupAnimationForMonster(newMonster);
 
 
-        //Setup the animation clip - We dont want to have to create an animation clip for EVERY monster we make, that'd be boring. Also, we don't want
-        //to call resources load every time, so were going to store it
-        /*AnimationClip ac = null;
-        string spriteName = newMonster.animInfo.spriteName;
-
-        if (!animClipDict.ContainsKey(spriteName))
-        {
-            Sprite[] subSprites = Resources.LoadAll<Sprite>("Sprites/Monsters/" + spriteName);
-            if (subSprites == null || subSprites.Length == 0)
-            {
-                Debug.LogError("Monster: " + monsterName + " had the spriteName defined in bodyInfo as: " + spriteName + " on the prefab, but could not find the spriteSheet in: Resources/Sprites/Monsters/");
-            }
-            else
-            {
-                ac = CreateAnimationClip(subSprites, newMonster.animInfo.animationSpeed);
-                animClipDict.Add(spriteName, ac);
-            }
-        }
-
-        //If no animation clip, will just use the sprite they attached
-        if (ac)
-        {
-            Animation anim = newMonsterObj.AddComponent<Animation>();
-            anim.clip = ac;
-            anim.wrapMode = WrapMode.Loop;
-            anim.Play();
-        }*/
-
-
-
         //Setup the AI
         //Atm there is only one type of AI (State machine), so we will initialize that inside of Monster
 
         newMonster.Initialize();
         return newMonster;
-        /*
-        SpriteRenderer sr = newMonster.AddComponent<SpriteRenderer>();
-        sr.sprite = Resources.Load<Sprite>("Sprites/Monsters/" + monsterName);
-        sr.sortingLayerName = "Monster";
-        newMonster.AddComponent<BoxCollider2D>();
-        */
     }
 
     /* The old factory would create everything by using parameters in code. This allows us to randomly generate hundreds of enemies easily, but makes it

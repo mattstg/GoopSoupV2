@@ -65,6 +65,9 @@ public class Player : MonoBehaviour
     {
         toPickUp.transform.SetParent(transform);
         toPickUp.transform.localPosition = localHandPos;
+
+        
+
     }
 
     private void DroppedPresed()

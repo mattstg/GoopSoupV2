@@ -86,7 +86,7 @@ public class Monster : MonoBehaviour, IPoolable {
     public class BodyInfo
     {
         public float maxHp, accel, maxSpeed;
-        public float hp;
+        [HideInInspector] public float hp;
 
     }
 
