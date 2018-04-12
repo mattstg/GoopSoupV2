@@ -10,14 +10,14 @@ public class Monster : MonoBehaviour, IPoolable {
 	MonsterAI ai;
     Rigidbody2D rb;
 
-    [Tooltip("Ingredient value of the creature")]
-    public ColorInit ingredientValue;
+    public Ingredient ingredientInfo;
     public BodyInfo bodyInfo;
     public AnimInfo animInfo;
     public AIInfo aiInfo;
 
     public virtual void Initialize()
     {
+        
         bodyInfo.hp = bodyInfo.maxHp;
         rb = GetComponent<Rigidbody2D>();
 		ai = new MonsterAI (this);          //Atm there is only one kind of AI, so it is just initalized in here
@@ -54,6 +54,7 @@ public class Monster : MonoBehaviour, IPoolable {
 
     public void MoveTowards(Vector2 targetPos)
     {
+        Debug.Log("Move towrads:" + targetPos + " from " + transform.position);
         if (Vector2.Distance(transform.position, targetPos) > GV.Monster_Move_TargetReachDist)
         {
             Vector2 goalDir = targetPos - (Vector2)transform.position;

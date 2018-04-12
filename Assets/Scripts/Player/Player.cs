@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
 
     private void PickupPressed()
     {
-        RaycastHit2D rh = Physics2D.Raycast((Vector2)transform.position, new Vector2(), 1f, 1 << LayerMask.NameToLayer("Goop"));
+        RaycastHit2D rh = Physics2D.Raycast((Vector2)transform.position, new Vector2(), 1f, 1 << LayerMask.NameToLayer("Plant"));
         if (rh)
             PickupObject(rh.transform.gameObject);
     }
@@ -65,9 +65,6 @@ public class Player : MonoBehaviour
     {
         toPickUp.transform.SetParent(transform);
         toPickUp.transform.localPosition = localHandPos;
-
-        
-
     }
 
     private void DroppedPresed()

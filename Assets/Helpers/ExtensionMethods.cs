@@ -15,5 +15,11 @@ public static class ExtensionMethods {
     {
         return new Vector3(thisV.x *= otherV.x, thisV.y *= otherV.y, thisV.z *= otherV.z);
     }
-	
+
+    public static void AddIngredient(this Ingredient thisIngredient, Ingredient otherIngredient)
+    {
+        thisIngredient.r += otherIngredient.r;
+        thisIngredient.g += otherIngredient.g;
+        thisIngredient.b += otherIngredient.b;
+    }
 }

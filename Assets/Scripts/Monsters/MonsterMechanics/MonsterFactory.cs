@@ -47,6 +47,8 @@ public class MonsterFactory {
                     Debug.Log("Monster: " + prefab.name + " used the layer: " + LayerMask.LayerToName(newMonster.gameObject.layer) + " instead of Monster, was that on purpose?");
                 if (!newMonster.GetComponent<Collider2D>())
                     Debug.Log("Monster: " + prefab.name + " does not have a collider was that on purpose?");
+                if (newMonster.bodyInfo.maxHp <= 0)
+                    Debug.LogError("Monster: " + prefab.name + " maxHp is <= 0!! dies on spawn!");
 
                 newMonster.GetComponent<SpriteRenderer>().sortingLayerName = "Monster";
                 //Setup the Rigidbody - If a developer wants a different setup, this would not allow it, so must be careful and mention this in meetings

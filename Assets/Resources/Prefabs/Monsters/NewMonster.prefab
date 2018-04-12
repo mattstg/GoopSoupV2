@@ -9,47 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1673096849519316}
+  m_RootGameObject: {fileID: 1760214146684644}
   m_IsPrefabParent: 1
---- !u!1 &1673096849519316
+--- !u!1 &1760214146684644
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4062913743592730}
-  - component: {fileID: 50798167054885004}
-  - component: {fileID: 212182760311554778}
-  - component: {fileID: 114820041217763510}
-  - component: {fileID: 61866245557619020}
+  - component: {fileID: 4639098485963056}
+  - component: {fileID: 50401219053463348}
+  - component: {fileID: 212208034229322426}
+  - component: {fileID: 114188886966664658}
+  - component: {fileID: 61284930755127458}
   m_Layer: 11
-  m_Name: Chicken
+  m_Name: NewMonster
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4062913743592730
+--- !u!4 &4639098485963056
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1673096849519316}
+  m_GameObject: {fileID: 1760214146684644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.541, y: 0.671, z: -0.0015071719}
+  m_LocalPosition: {x: 14.141233, y: 8.242724, z: -0.171875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50798167054885004
+--- !u!50 &50401219053463348
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1673096849519316}
+  m_GameObject: {fileID: 1760214146684644}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -63,12 +63,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &61866245557619020
+--- !u!61 &61284930755127458
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1673096849519316}
+  m_GameObject: {fileID: 1760214146684644}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -78,25 +78,25 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.4848485, y: 0.4848485}
-    newSize: {x: 0.4848485, y: 0.4848485}
-    adaptiveTilingThreshold: 0.5
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.4848485, y: 0.4848485}
+  m_Size: {x: 0.0001, y: 0.0001}
   m_EdgeRadius: 0
---- !u!114 &114820041217763510
+--- !u!114 &114188886966664658
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1673096849519316}
+  m_GameObject: {fileID: 1760214146684644}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 610d2436e120b7242bdc86d3fbbab89c, type: 3}
+  m_Script: {fileID: 11500000, guid: 0de93128e72770c4895988b5576e543b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientInfo:
@@ -104,22 +104,22 @@ MonoBehaviour:
     g: 0
     b: 0
   bodyInfo:
-    maxHp: 1
-    accel: 4
-    maxSpeed: 4
+    maxHp: 0
+    accel: 0
+    maxSpeed: 0
     hp: 0
   animInfo:
-    spriteName: Chicken
-    animationSpeed: 0.05
+    spriteName: Slime
+    animationSpeed: 0.2
   aiInfo:
-    aggroRange: 3
-    attentionSpan: 1
---- !u!212 &212182760311554778
+    aggroRange: 2
+    attentionSpan: 2
+--- !u!212 &212208034229322426
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1673096849519316}
+  m_GameObject: {fileID: 1760214146684644}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -148,13 +148,13 @@ SpriteRenderer:
   m_SortingLayerID: -1839312757
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b7ae3e61e018756468a7df3cbd900d36, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.4848485, y: 0.4848485}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
