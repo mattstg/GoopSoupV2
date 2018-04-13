@@ -26,12 +26,17 @@ public class GV {
 
     public static Vector2 GetRandomSpotInMap()
     {
+        //The edges are size 1x1, so take that into account
         return new Vector2(UnityEngine.Random.Range(1, Map_Size_XY.x - 1), UnityEngine.Random.Range(1, Map_Size_XY.y - 1));
     }
 
-    public static Vector2 GetRandomSpotNear(Vector2 location, float maxDistance)
+    /// <summary>
+    /// Returns a random spot near in a unit circle
+    /// </summary>    
+    public static Vector2 GetRandomSpotNear(Vector2 location, Vector2 distanceRange)
     {
-        return location + UnityEngine.Random.insideUnitCircle * maxDistance;
+        float distance = UnityEngine.Random.Range(distanceRange.x, distanceRange.y);
+        return location + UnityEngine.Random.insideUnitCircle * distance;
     }
 
     /// <summary>

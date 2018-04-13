@@ -28,7 +28,7 @@ public class PlayerManager
     public void Initialize()
     {
         vrCam = GameObject.FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
-        SpawnPlayerAtLoc(new Vector2());
+        SpawnPlayerAtLoc(GV.GetRandomSpotInMap());
         
     }
 
