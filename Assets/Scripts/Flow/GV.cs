@@ -33,10 +33,9 @@ public class GV {
     /// <summary>
     /// Returns a random spot near in a unit circle
     /// </summary>    
-    public static Vector2 GetRandomSpotNear(Vector2 location, Vector2 distanceRange)
+    public static Vector2 GetRandomSpotNear(Vector2 location, float maxDistance)
     {
-        float distance = UnityEngine.Random.Range(distanceRange.x, distanceRange.y);
-        return location + UnityEngine.Random.insideUnitCircle * distance;
+        return location + UnityEngine.Random.insideUnitCircle * maxDistance;
     }
 
     /// <summary>
