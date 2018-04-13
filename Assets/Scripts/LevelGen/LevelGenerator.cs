@@ -23,7 +23,6 @@ public class LevelGenerator  {
     #endregion
 
     string grassTileMapPath = "Tilemap/Tiles/Grass";
-    string wallTileBasePath = "Tilemap/Tiles/WorldTiles/TerrainElements_32";
 
     public void GenerateWorldMap(Vector2Int size)
     {
@@ -71,7 +70,7 @@ public class LevelGenerator  {
             tileMapObj.AddComponent<TilemapRenderer>();
 
             //Create tilebase array
-            TileBase wallTile = Resources.Load<TileBase>(wallTileBasePath); //load all 
+            TileBase wallTile = GV.ws.rockTile;// Resources.Load<TileBase>(wallTileBasePath); //load all 
 
             TileBase[] tileArray = new TileBase[size.x * size.y];
             for (int index = 0; index < tileArray.Length; index++)

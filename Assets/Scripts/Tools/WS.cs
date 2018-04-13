@@ -6,6 +6,7 @@ public class WS : MonoBehaviour {
 
     public Grid worldGrid;
     public PolygonCollider2D camBounds;
+    public UnityEngine.Tilemaps.TileBase rockTile;
 
     public void Awake()
     {

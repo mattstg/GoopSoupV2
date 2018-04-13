@@ -29,7 +29,7 @@ public class GV {
     public static Vector2 GetRandomSpotInMap()
     {
         //The edges are size 1x1, so take that into account
-        return new Vector2(UnityEngine.Random.Range(1, Map_Size_XY.x - 1), UnityEngine.Random.Range(1, Map_Size_XY.y - 1));
+        return new Vector2(UnityEngine.Random.Range(2, Map_Size_XY.x - 2), UnityEngine.Random.Range(2, Map_Size_XY.y - 2));
     }
 
     /// <summary>
