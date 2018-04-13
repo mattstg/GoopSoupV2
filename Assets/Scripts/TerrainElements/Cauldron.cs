@@ -4,7 +4,13 @@ using UnityEngine;
 
 public class Cauldron : MonoBehaviour {
 
+    SpriteRenderer liquidSr;
     Ingredient cauldronIngredients = new Ingredient();
+
+    public void Initialize()
+    {
+        liquidSr = GetComponentInChildren<SpriteRenderer>();
+    }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -14,6 +20,8 @@ public class Cauldron : MonoBehaviour {
             cauldronIngredients += p.ingredient;
             GameObject.Destroy(collision.gameObject);
             Debug.Log("Cauldrion ingredients: " + cauldronIngredients);
+            liquidSr.color = cauldronIngredients.ToColor();
         }
     }
+        
 }

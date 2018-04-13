@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
 
     //Carry mechanics
     bool isCarrying = false;
-    readonly float carryingRange = .7f;
     Vector2 localHandPos;
 
     public void PlayerSpawned()

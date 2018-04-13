@@ -28,8 +28,16 @@ public class PlayerManager
     public void Initialize()
     {
         vrCam = GameObject.FindObjectOfType<Cinemachine.CinemachineVirtualCamera>();
-        SpawnPlayerAtLoc(GV.GetRandomSpotInMap());
-        
+        Vector2 playerpos = GV.GetRandomSpotInMap();
+        SpawnPlayerAtLoc(playerpos);
+        SetupCauldron(playerpos);
+    }
+
+    private void SetupCauldron(Vector2 loc)
+    {
+        Cauldron cauldron = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Cauldron")).GetComponent<Cauldron>();
+        cauldron.Initialize();
+        cauldron.transform.position = GV.GetRandomSpotNear(loc, 1);
     }
 
     public void Update(float dt)

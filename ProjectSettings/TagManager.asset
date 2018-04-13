@@ -7,6 +7,8 @@ TagManager:
   - Goop
   - Spawner
   - Monster
+  - Cauldron
+  - Plant
   layers:
   - Default
   - TransparentFX
@@ -22,7 +24,7 @@ TagManager:
   - Monster
   - Spawner
   - TerrainElement
-  - Planet
+  - Plant
   - 
   - 
   - 
@@ -55,6 +57,9 @@ TagManager:
     locked: 0
   - name: Spawner
     uniqueID: 3836155669
+    locked: 0
+  - name: Cauldron
+    uniqueID: 955973807
     locked: 0
   - name: UIText
     uniqueID: 1918897777

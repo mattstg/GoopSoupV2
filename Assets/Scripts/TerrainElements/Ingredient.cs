@@ -8,7 +8,7 @@ public class Ingredient  {
 
     public Ingredient()
     {
-        r = g = b = .5f;
+        r = g = b = .5f;// (255 / 2f);
     }
 
     public Ingredient(float _r, float _g, float _b) 
@@ -18,10 +18,17 @@ public class Ingredient  {
         b = _b;
     }
 
+
+
     //Override string operator so easy to output and test
     public override string ToString()
     {
         return string.Format("(r{0},g{1},b{2})", r, g, b);
+    }
+
+    public Color ToColor()
+    {
+        return new Color(r,g,b);
     }
 
     public static Ingredient operator +(Ingredient v1, Ingredient v2)
