@@ -54,7 +54,6 @@ public class Monster : MonoBehaviour, IPoolable {
 
     public void MoveTowards(Vector2 targetPos)
     {
-        Debug.Log("Move towrads:" + targetPos + " from " + transform.position);
         if (Vector2.Distance(transform.position, targetPos) > GV.Monster_Move_TargetReachDist)
         {
             Vector2 goalDir = targetPos - (Vector2)transform.position;

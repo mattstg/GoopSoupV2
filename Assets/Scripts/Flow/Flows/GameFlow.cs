@@ -9,7 +9,6 @@ public class GameFlow : Flow {
     {
         PlayerManager.Instance.Initialize();
         MonsterFactory.Instance.InitializeFactory();
-        TimerManager.Instance.AddTimer(1, TestFuncD, 2f);
     }
 
     public override void UpdateFlow(float dt)
@@ -23,21 +22,4 @@ public class GameFlow : Flow {
     {
         PlayerManager.Instance.FixedUpdate(dt);
     }
-
-    public void TestFuncA(float a)
-    {
-
-    }
-
-    public void TestFuncB(float a, float b)
-    {
-
-    }
-
-    public void TestFuncC(float m, string a, int c, string twelve)
-    {
-
-    }
-
-    public void TestFuncD(params object[] args) { }
 }

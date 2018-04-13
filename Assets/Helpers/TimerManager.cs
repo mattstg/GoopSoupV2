@@ -23,7 +23,7 @@ public class TimerManager {
     }
     #endregion Singleton
 
-    public delegate void GenericDelegate(params object[] args);
+    public delegate void NonParamDelg();
 
     List<Timer> timers;
     Stack<Timer> timersToRemove;
@@ -59,35 +59,21 @@ public class TimerManager {
         timersToRemove.Push(t);
     }
 
-    //Since a timer triggering can add more timers, we need to be safe
-    public void AddTimer(float t, GenericDelegate funcToInvoke, params object[] args)
-    {
-        Timer toAdd = new Timer(t, funcToInvoke, args);
-        timersToAdd.Push(toAdd);
-    }
-
-    public void AT(float t, MethodInfo mi)
-    {
-        //mi.Invoke
-    }
-
-
     public class Timer
     {
         public float countdown;
-        GenericDelegate funcToInvoke;
-        object[] args;
+        NonParamDelg funcToInvoke;
+        //object[] args;
 
-        public Timer(float t, GenericDelegate genericDelegate, params object[] _args)
+        public Timer(float t, NonParamDelg genericDelegate)
         {
             countdown = t;
             funcToInvoke = genericDelegate;
-            args = _args;
         }
 
         public void InvokeTimerFunc()
         {
-            funcToInvoke.Invoke(args);
+            funcToInvoke.Invoke();
         }
     }
         
