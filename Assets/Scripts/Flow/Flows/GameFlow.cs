@@ -7,6 +7,7 @@ public class GameFlow : Flow {
 
 	public override void InitializeFlow()
     {
+        LevelGenerator.Instance.GenerateWorldMap(GV.Map_Size_XY);
         PlayerManager.Instance.Initialize();
         MonsterFactory.Instance.InitializeFactory();
     }

@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class GV {
 
+    public static WS ws;
+
     public static readonly Vector2 Map_Size_XY = new Vector2(32,17); //NxN map size
 
     public static readonly float Monster_Breed_SpawnDist = 2; //How far spawns from breeder
