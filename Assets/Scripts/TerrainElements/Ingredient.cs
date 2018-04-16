@@ -28,7 +28,7 @@ public class Ingredient  {
 
     public Color ToColor()
     {
-        return new Color(r,g,b);
+        return new Color(r / 255, g / 255, b / 255, 1);
     }
 
     public static Ingredient operator +(Ingredient v1, Ingredient v2)

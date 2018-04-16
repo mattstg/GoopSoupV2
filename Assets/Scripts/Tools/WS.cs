@@ -8,6 +8,10 @@ public class WS : MonoBehaviour {
     public PolygonCollider2D camBounds;
     public UnityEngine.Tilemaps.TileBase rockTile;
 
+    [Header("Plants")]
+    public int flowerNumber;
+    public Vector2Int flowerMutationRange;
+
     public void Awake()
     {
         GV.ws = this;

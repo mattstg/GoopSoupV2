@@ -49,6 +49,9 @@ TagManager:
   - name: Monster
     uniqueID: 2455654539
     locked: 0
+  - name: Plant
+    uniqueID: 1476283751
+    locked: 0
   - name: Foreground
     uniqueID: 3489371101
     locked: 0

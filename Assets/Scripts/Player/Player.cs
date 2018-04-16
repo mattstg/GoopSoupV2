@@ -12,8 +12,10 @@ public class Player : MonoBehaviour
     readonly float PLAYER_MOVE_VELO = 3;
 
     //Carry mechanics
-    bool isCarrying = false;
+    public bool isCarrying = false;
     Vector2 localHandPos;
+
+    Transform objectPickedUp;
 
     public void PlayerSpawned()
     {
@@ -55,20 +57,30 @@ public class Player : MonoBehaviour
 
     private void PickupPressed()
     {
-        RaycastHit2D rh = Physics2D.Raycast((Vector2)transform.position, new Vector2(), 1f, 1 << LayerMask.NameToLayer("Plant"));
+        RaycastHit2D rh = Physics2D.Raycast((Vector2)transform.position, Vector2.left, 1f, 1 << LayerMask.NameToLayer("Plant"));
+
         if (rh)
             PickupObject(rh.transform.gameObject);
     }
 
     private void PickupObject(GameObject toPickUp)
     {
+        isCarrying = true;
+        PlantsManager.Instance.PickupPlant(toPickUp.transform);
+
         toPickUp.transform.SetParent(transform);
         toPickUp.transform.localPosition = localHandPos;
+
+        objectPickedUp = toPickUp.transform;
     }
 
     private void DroppedPresed()
     {
         Debug.Log("Dropped Pressed");
+        objectPickedUp.transform.SetParent(null);
+        PlantsManager.Instance.DropPlant(objectPickedUp.transform);
+
+        isCarrying = false;
     }
 
     public void FixedUpdatePlayer(float dt)
