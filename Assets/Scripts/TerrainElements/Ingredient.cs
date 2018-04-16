@@ -8,7 +8,7 @@ public class Ingredient  {
 
     public Ingredient()
     {
-        r = g = b = .5f;// (255 / 2f);
+        r = g = b = (255 / 2f);
     }
 
     public Ingredient(float _r, float _g, float _b) 
