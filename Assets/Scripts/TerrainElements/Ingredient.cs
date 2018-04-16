@@ -18,8 +18,6 @@ public class Ingredient  {
         b = _b;
     }
 
-
-
     //Override string operator so easy to output and test
     public override string ToString()
     {

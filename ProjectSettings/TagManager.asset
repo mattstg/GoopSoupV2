@@ -64,3 +64,6 @@ TagManager:
   - name: UIText
     uniqueID: 1918897777
     locked: 0
+  - name: Plants
+    uniqueID: 563191119
+    locked: 0

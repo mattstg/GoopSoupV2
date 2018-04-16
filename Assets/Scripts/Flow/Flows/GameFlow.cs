@@ -9,12 +9,14 @@ public class GameFlow : Flow {
     {
         LevelGenerator.Instance.GenerateWorldMap(GV.Map_Size_XY);
         PlayerManager.Instance.Initialize();
+        PlantManager.Instance.Initialize();
         MonsterFactory.Instance.InitializeFactory();
     }
 
     public override void UpdateFlow(float dt)
     {
         PlayerManager.Instance.Update(dt);
+        PlantManager.Instance.Update(dt);
         MonsterRandomSpawner.Instance.Update(dt);
         MonsterManager.Instance.UpdateMonsterManager(dt);
     }

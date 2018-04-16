@@ -46,6 +46,7 @@ public class Player : MonoBehaviour
                 DroppedPresed();
             else
                 PickupPressed();
+        Debug.Log("Is Carrying : " + isCarrying);
     }
 
     private void Move(Vector2 dir)
@@ -57,18 +58,22 @@ public class Player : MonoBehaviour
     {
         RaycastHit2D rh = Physics2D.Raycast((Vector2)transform.position, new Vector2(), 1f, 1 << LayerMask.NameToLayer("Plant"));
         if (rh)
+        {
             PickupObject(rh.transform.gameObject);
+        }
     }
 
     private void PickupObject(GameObject toPickUp)
     {
         toPickUp.transform.SetParent(transform);
         toPickUp.transform.localPosition = localHandPos;
+        isCarrying = true;
     }
 
     private void DroppedPresed()
     {
-        Debug.Log("Dropped Pressed");
+        gameObject.transform.GetChild(0).transform.parent = null;
+        isCarrying = false;
     }
 
     public void FixedUpdatePlayer(float dt)
