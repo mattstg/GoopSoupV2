@@ -5,10 +5,12 @@ using UnityEngine;
 public class Cauldron : MonoBehaviour {
 
     public SpriteRenderer liquidSr;
-    Ingredient cauldronIngredients = new Ingredient();
+    public Ingredient cauldronIngredients;
 
     public void Initialize()
     {
+        cauldronIngredients = new Ingredient();
+        liquidSr.color = cauldronIngredients.ToColor();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

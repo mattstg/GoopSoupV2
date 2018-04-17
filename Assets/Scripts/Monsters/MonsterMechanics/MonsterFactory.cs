@@ -25,9 +25,16 @@ public class MonsterFactory {
     string[] monsterNames;
     int monsterLayer;
 
+    
+
     private MonsterFactory()
     {
         monsterLayer = LayerMask.NameToLayer("Monster");
+    }
+
+    public string GetRandomMonsterName()
+    {
+        return GV.GetRandomElemFromArr<string>(monsterNames);
     }
 
     public void InitializeFactory()

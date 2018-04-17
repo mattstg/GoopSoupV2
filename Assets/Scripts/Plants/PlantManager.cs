@@ -69,7 +69,6 @@ public class PlantManager  {
         newPlant.transform.SetParent(plantGroup);
         newPlant.transform.position = loc;
         plants.Add(plantScript);
-
     }
 
     public void RemovePlant(Plant toRemove)
@@ -83,6 +82,7 @@ public class PlantManager  {
         while(attempts < 100)
         {
             Vector2 randPlace = GV.GetRandomSpotInMap();
+            randPlace = new Vector2((int)randPlace.x, (int)randPlace.y); //making the map more like a grid
             RaycastHit2D rh = Physics2D.BoxCast(randPlace, plantSize, 0, new Vector2(),0, plantPlacementLayerCheck);
             if (!rh)
                 return randPlace;

@@ -53,6 +53,7 @@ public class Plant : MonoBehaviour {
     private void AttemptSpread()
     {
         Vector2 randPlace = GV.GetRandomSpotNear(transform.position, GV.Plants_Breed_Distance_Range);
+        randPlace = new Vector2((int)randPlace.x, (int)randPlace.y);
         RaycastHit2D rh = Physics2D.BoxCast(randPlace, coli.bounds.size, 0, new Vector2(), 0, PlantManager.plantPlacementLayerCheck);
         if (!rh)
             SpreadPlant(randPlace);

@@ -280,7 +280,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 418775396}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.2108245, y: 3.57, z: -10.001507}
+  m_LocalPosition: {x: 4.7854257, y: 3.57, z: -10.001507}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 412414262}
@@ -577,6 +577,30 @@ MonoBehaviour:
   worldGrid: {fileID: 1666987272}
   camBounds: {fileID: 2064113055}
   rockTile: {fileID: 11400000, guid: 35d62024289c2d0488536d9037c99293, type: 2}
+  thrownAnim:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 0.501634
+      value: 0.39436615
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1.001648
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
 --- !u!4 &1925789993
 Transform:
   m_ObjectHideFlags: 0

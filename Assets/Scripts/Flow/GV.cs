@@ -19,11 +19,16 @@ public class GV {
 
     public static readonly float Ingredient_Similarity_Range = .2f; //If plants ingredients within X of each other, are considered similar
 
+    public static readonly float Player_Drop_Distance = -.33f;
+    public static readonly Vector2 Player_Throw_Distance = new Vector2(-1.6f,0);
+    public static readonly float Player_Throw_Time = .5f;
 
-    public static readonly float Monster_Breed_SpawnDist = 2; //How far spawns from breeder
+    public static readonly float Monster_Breed_SpawnDist = 2.5f; //How far spawns from breeder
     public static readonly float Monster_Move_TargetReachDist = .1f; //When within this range, it is considered reaching its target
 
-    public static readonly float Spawner_Summon_Time = 15; //Attempts to summon a spawner ever N seconds
+    public static readonly int Monolith_Spawn_Initial = 2; //Number of monoliths in the game start
+    public static readonly int Monolith_Spawn_Monolith_Rate = 120; //Number of seconds to spawn a new monolith
+    public static readonly int Monolith_Spawn_Monster_Rate = 12; //Every N seconds spawns monster near monolith
 
     public static T GetRandomEnum<T>() where T : struct, IConvertible
     {

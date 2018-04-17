@@ -3,5 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface IUpdatable  {
-    void Update(float dt);
+    void Initialize();
+    void IUpdate(float dt);
 }

@@ -9,6 +9,8 @@ TagManager:
   - Monster
   - Cauldron
   - Plant
+  - Potion
+  - Monolith
   layers:
   - Default
   - TransparentFX
@@ -26,9 +28,9 @@ TagManager:
   - TerrainElement
   - Plant
   - MapEdges
-  - 
-  - 
-  - 
+  - Cauldron
+  - Potion
+  - Monolith
   - 
   - 
   - 
@@ -63,4 +65,7 @@ TagManager:
     locked: 0
   - name: UIText
     uniqueID: 1918897777
+    locked: 0
+  - name: Potion
+    uniqueID: 94317467
     locked: 0

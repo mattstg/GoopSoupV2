@@ -9,18 +9,23 @@ public class GenericManager<T> where T : IUpdatable  {
     Stack<T> toRemoveStack;
     Stack<T> toAddStack;
 
-    private GenericManager()
+    public GenericManager()
     {
         managingList = new List<T>();
         toRemoveStack = new Stack<T>();
         toAddStack = new Stack<T>();
     }
 
+    public virtual void Initialize()
+    {
+
+    }
+
     public virtual void UpdateManager(float dt)
     {
         UpdateStackElements();
         foreach (T t in managingList)
-            t.Update(dt);
+            t.IUpdate(dt);
     }
 
     private void UpdateStackElements()
