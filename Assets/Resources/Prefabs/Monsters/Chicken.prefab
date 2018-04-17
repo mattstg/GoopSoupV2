@@ -112,7 +112,7 @@ MonoBehaviour:
     spriteName: Chicken
     animationSpeed: 0.05
   aiInfo:
-    aggroRange: 3
+    aggroRange: 1
     attentionSpan: 1
 --- !u!212 &212182760311554778
 SpriteRenderer:

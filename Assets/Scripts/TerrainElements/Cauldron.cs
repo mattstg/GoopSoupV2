@@ -4,12 +4,11 @@ using UnityEngine;
 
 public class Cauldron : MonoBehaviour {
 
-    SpriteRenderer liquidSr;
+    public SpriteRenderer liquidSr;
     Ingredient cauldronIngredients = new Ingredient();
 
     public void Initialize()
     {
-        liquidSr = GetComponentInChildren<SpriteRenderer>();
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
@@ -18,8 +17,8 @@ public class Cauldron : MonoBehaviour {
         {
             Plant p = collision.gameObject.GetComponent<Plant>();
             cauldronIngredients += p.ingredient;
+            PlantManager.Instance.RemovePlant(p);
             GameObject.Destroy(collision.gameObject);
-            Debug.Log("Cauldrion ingredients: " + cauldronIngredients);
             liquidSr.color = cauldronIngredients.ToColor();
         }
     }

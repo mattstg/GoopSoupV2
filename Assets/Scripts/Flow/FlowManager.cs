@@ -27,6 +27,7 @@ public class FlowManager  {
     public SceneNames currentScene;
     Flow currentFlow;
     bool flowInitialized = false;
+    
 
     public void InitializeFlowManager(SceneNames initialScene)
     {
@@ -38,7 +39,7 @@ public class FlowManager  {
 
     public void Update(float dt)
     {
-        if(currentFlow != null && flowInitialized)
+        if (currentFlow != null && flowInitialized)
             currentFlow.UpdateFlow(dt);
     }
 

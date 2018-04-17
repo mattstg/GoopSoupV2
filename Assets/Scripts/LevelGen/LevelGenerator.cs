@@ -64,7 +64,8 @@ public class LevelGenerator  {
 
         { //Putting in scope so dont have to rename vars
             GameObject tileMapObj = new GameObject();
-            tileMapObj.name = "TileMapEdge";
+            tileMapObj.name = "MapEdges";
+            tileMapObj.layer = LayerMask.NameToLayer("MapEdges");
             tileMapObj.transform.SetParent(worldGrid.transform);
             Tilemap tilemap = tileMapObj.AddComponent<Tilemap>();
             tileMapObj.AddComponent<TilemapRenderer>();

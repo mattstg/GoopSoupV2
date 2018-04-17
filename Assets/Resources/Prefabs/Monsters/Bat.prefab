@@ -106,13 +106,13 @@ MonoBehaviour:
   bodyInfo:
     maxHp: 1
     accel: 1
-    maxSpeed: 3
+    maxSpeed: 4
     hp: 0
   animInfo:
     spriteName: Bat
     animationSpeed: 0.3
   aiInfo:
-    aggroRange: 3
+    aggroRange: 1
     attentionSpan: 5
 --- !u!212 &212348567237182922
 SpriteRenderer:

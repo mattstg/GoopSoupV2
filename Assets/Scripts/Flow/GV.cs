@@ -10,6 +10,16 @@ public class GV {
 
     public static readonly Vector2Int Map_Size_XY = new Vector2Int(32,17); //NxN map size
 
+    public static readonly int Plants_InitialSpawnCount = 20;
+    public static readonly Vector2 Plants_Breed_Time_Range = new Vector2(12, 20);
+    public static readonly Vector2 Plants_Breed_Distance_Range = new Vector2(1, 3);
+    public static readonly float Plants_Breed_Time_CountMultiplier = .01f; //Increases the time to breed by 1% for every plant that exists
+    public static readonly float Plants_Breed_Mutation_Chance = .1f;
+    public static readonly Vector2 Plants_Breed_Mutation_Variation_Range = new Vector2(.1f,.3f);
+
+    public static readonly float Ingredient_Similarity_Range = .2f; //If plants ingredients within X of each other, are considered similar
+
+
     public static readonly float Monster_Breed_SpawnDist = 2; //How far spawns from breeder
     public static readonly float Monster_Move_TargetReachDist = .1f; //When within this range, it is considered reaching its target
 
@@ -41,6 +51,27 @@ public class GV {
     }
 
     /// <summary>
+    /// Returns true if a and b are within acceptableRange of each other
+    /// </summary>
+    public static bool WithinRange(float a, float b, float acceptableRange)
+    {
+        return (Mathf.Abs(a - b) <= acceptableRange);
+    }
+
+    /// <summary>
+    /// Returns random spot near in unit circle with a min distance
+    /// </summary>
+    /// <param name="location"></param>
+    /// <param name="maxDistance"></param>
+    /// <returns></returns>
+    public static Vector2 GetRandomSpotNear(Vector2 location, Vector2 distRange)
+    {
+        Vector2 v = UnityEngine.Random.onUnitSphere;
+        Vector2 v2 = Vector2.Lerp(v * distRange.x, v * distRange.y, UnityEngine.Random.value); 
+        return location + v2;
+    }
+
+    /// <summary>
     /// Returns a random element from a generic array.
     /// </summary>
     public static T GetRandomElemFromArr<T>(T[] arr, bool allowNull = false)
@@ -69,6 +100,16 @@ public class GV {
             Debug.LogError("Get random elem from array could not randomly find a non-null element after many attempts, returning the first element, which may be null");
             return arr[0];
         }
+    }
+
+    public static float GetRandomFromV2(Vector2 v2)
+    {
+        return UnityEngine.Random.Range(v2.x, v2.y);
+    }
+
+    public static float RandomNegator()
+    {
+        return (UnityEngine.Random.value > .5f) ? 1: -1;
     }
 
 }

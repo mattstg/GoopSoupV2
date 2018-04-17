@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     //Carry mechanics
     bool isCarrying = false;
     Vector2 localHandPos;
+    GameObject carryingObject;
 
     public void PlayerSpawned()
     {
@@ -55,7 +56,7 @@ public class Player : MonoBehaviour
 
     private void PickupPressed()
     {
-        RaycastHit2D rh = Physics2D.Raycast((Vector2)transform.position, new Vector2(), 1f, 1 << LayerMask.NameToLayer("Plant"));
+        RaycastHit2D rh = Physics2D.Raycast((Vector2)transform.position + localHandPos, new Vector2(), 1f, 1 << LayerMask.NameToLayer("Plant"));
         if (rh)
             PickupObject(rh.transform.gameObject);
     }
@@ -64,11 +65,24 @@ public class Player : MonoBehaviour
     {
         toPickUp.transform.SetParent(transform);
         toPickUp.transform.localPosition = localHandPos;
+        carryingObject = toPickUp;
+        Collider2D coli = toPickUp.GetComponent<Collider2D>();
+        if(coli) coli.enabled = false;
+        isCarrying = true;
     }
 
     private void DroppedPresed()
     {
-        Debug.Log("Dropped Pressed");
+        if(carryingObject)
+        {
+            Collider2D coli = carryingObject.GetComponent<Collider2D>();
+            if (coli) coli.enabled = true;
+            isCarrying = false;
+            carryingObject.transform.SetParent(null); //This is bad, what if it belonged to a parent group?
+            carryingObject.transform.localPosition = carryingObject.transform.localPosition + new Vector3(-1, 0, 0);
+            carryingObject = null;
+        }
+
     }
 
     public void FixedUpdatePlayer(float dt)

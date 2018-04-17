@@ -10,6 +10,8 @@ public class GameFlow : Flow {
         LevelGenerator.Instance.GenerateWorldMap(GV.Map_Size_XY);
         PlayerManager.Instance.Initialize();
         MonsterFactory.Instance.InitializeFactory();
+        PlantManager.Instance.Initialize();
+        PlantManager.Instance.FillWorldWithPlants(GV.Plants_InitialSpawnCount);
     }
 
     public override void UpdateFlow(float dt)
@@ -17,6 +19,7 @@ public class GameFlow : Flow {
         PlayerManager.Instance.Update(dt);
         MonsterRandomSpawner.Instance.Update(dt);
         MonsterManager.Instance.UpdateMonsterManager(dt);
+        PlantManager.Instance.UpdatePlants(dt);
     }
 
     public override void FixedUpdateFlow(float dt)
