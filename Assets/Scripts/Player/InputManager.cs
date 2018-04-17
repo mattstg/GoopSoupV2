@@ -45,8 +45,9 @@ public class InputManager
             dirPressed.y -= 1;
 
         bool pickDropPressed = Input.GetKeyDown(KeyCode.F);
+        bool makePotionPressed = Input.GetKeyDown(KeyCode.E);
         bool throwPressed = Input.GetMouseButtonDown(0);
-        return new InputInfo(dirPressed, pickDropPressed, throwPressed);
+        return new InputInfo(dirPressed, pickDropPressed, throwPressed, makePotionPressed);
     }
 
 
@@ -55,12 +56,14 @@ public class InputManager
         public Vector2 dirPressed;
         public bool pickDropPressed;
         public bool throwPressed;
+        public bool makePotionPressed;
 
-        public InputInfo(Vector2 _dirPressed, bool _pickDropPressed, bool _throwPressed)
+        public InputInfo(Vector2 _dirPressed, bool _pickDropPressed, bool _throwPressed, bool _makePotionPressed)
         {
             dirPressed = _dirPressed;
             pickDropPressed = _pickDropPressed;
             throwPressed = _throwPressed;
+            makePotionPressed = _makePotionPressed;
         }
     }
 }

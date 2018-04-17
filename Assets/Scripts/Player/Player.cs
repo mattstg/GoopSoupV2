@@ -7,7 +7,7 @@ public class Player : MonoBehaviour
     bool initialized = false;
     InputManager inputManager;
     Rigidbody2D rb;
-
+    int carryMask;
     //Movement
     readonly float PLAYER_MOVE_VELO = 3;
 
@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
         localHandPos = handTransform.localPosition ; //transform.InverseTransformPoint(handTransform.position)
         GameObject.Destroy(handTransform.gameObject);
         initialized = true;
-
+        carryMask = (1 << LayerMask.NameToLayer("Plant") | 1 << LayerMask.NameToLayer("Cauldron"));
     }
 
     public void UpdatePlayer(float dt)
@@ -56,7 +56,7 @@ public class Player : MonoBehaviour
 
     private void PickupPressed()
     {
-        RaycastHit2D rh = Physics2D.Raycast((Vector2)transform.position + localHandPos, new Vector2(), 1f, 1 << LayerMask.NameToLayer("Plant"));
+        RaycastHit2D rh = Physics2D.Raycast((Vector2)transform.position + localHandPos, new Vector2(), 1f, carryMask);
         if (rh)
             PickupObject(rh.transform.gameObject);
     }
