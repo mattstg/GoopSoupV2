@@ -19,8 +19,8 @@ public class GV {
 
     public static readonly float Ingredient_Similarity_Range = .3f; //If plants ingredients within X of each other, are considered similar
 
-    public static readonly float Player_Drop_Distance = -.33f;
-    public static readonly Vector2 Player_Throw_Distance = new Vector2(-1.6f,0);
+    public static readonly float Player_Drop_Distance = .5f;
+    public static readonly float Player_Throw_Distance = 1.6f;
     public static readonly float Player_Throw_Time = .5f;
 
     public static readonly float Monster_Breed_SpawnDist = 2.5f; //How far spawns from breeder

@@ -23,7 +23,8 @@ public class Carried : MonoBehaviour {
         if(rb)
         {
             initialBodyType = rb.bodyType;
-            rb.bodyType = RigidbodyType2D.Kinematic;
+            rb.bodyType = RigidbodyType2D.Static;
+            rb.velocity = new Vector2();
         }
     }
 

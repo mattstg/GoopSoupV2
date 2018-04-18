@@ -69,3 +69,6 @@ TagManager:
   - name: Potion
     uniqueID: 94317467
     locked: 0
+  - name: Monolith
+    uniqueID: 228690239
+    locked: 0

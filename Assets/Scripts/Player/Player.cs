@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     InputManager inputManager;
     Rigidbody2D rb;
     int carryMask;
+    Vector2 lastMovedDir;
     //Movement
     readonly float PLAYER_MOVE_VELO = 3;
 
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
 
         inputManager.UpdateManager(dt);
         InputManager.InputInfo inputInfo = inputManager.GetInputInfo();
+        lastMovedDir = (inputInfo.dirPressed == new Vector2()) ? lastMovedDir : inputInfo.dirPressed ;
 
         if (inputInfo.pickDropPressed)
             if (carryingObject)
@@ -52,8 +54,7 @@ public class Player : MonoBehaviour
             if (carryingObject)
             {
                 GameObject toThrow = DeattachCarryingItem();
-                StartCoroutine(ThrowCarriedObject(toThrow, GV.Player_Throw_Distance,GV.Player_Throw_Time));
-                
+                StartCoroutine(ThrowCarriedObject(toThrow, lastMovedDir.normalized*GV.Player_Throw_Distance,GV.Player_Throw_Time));
             }
             else
                 MakePotionPressed();
@@ -64,9 +65,14 @@ public class Player : MonoBehaviour
         rb.velocity = dir.normalized * PLAYER_MOVE_VELO;
     }
 
+    private RaycastHit2D RaycastOutFromHand(float dist, int mask)
+    {
+        return Physics2D.Raycast((Vector2)transform.position + localHandPos, lastMovedDir, dist, carryMask);
+    }
+
     private void PickupPressed()
     {
-        RaycastHit2D rh = Physics2D.Raycast((Vector2)transform.position + localHandPos, new Vector2(-1,0), .33f, carryMask);
+        RaycastHit2D rh = RaycastOutFromHand(.33f, carryMask);
         if (rh)
             PickupObject(rh.transform.gameObject);
     }
@@ -91,6 +97,8 @@ public class Player : MonoBehaviour
     {
         Vector2 startPos = toThrow.transform.position;
         Vector2 endPos = startPos + displacement;
+        Vector2 startScale = toThrow.transform.localScale;
+        bool verticalDisplacement = (displacement.y != 0);
         float endTime = Time.time + throwTime;
         //See, more examples where turning off and on colliders everywhere! Should just be a "carried/thrown" script!
         Collider2D coli = toThrow.GetComponent<Collider2D>();
@@ -98,7 +106,13 @@ public class Player : MonoBehaviour
         while(Time.time < endTime)
         {
             float perctenage = 1 - ((endTime - Time.time) / throwTime);
-            toThrow.transform.position = new Vector2(Mathf.Lerp(startPos.x,endPos.x,perctenage),GV.ws.thrownAnim.Evaluate(perctenage) + startPos.y);
+            if (!verticalDisplacement)
+                toThrow.transform.position = new Vector2(Mathf.Lerp(startPos.x, endPos.x, perctenage), GV.ws.thrownAnim.Evaluate(perctenage) + startPos.y);
+            else
+            {
+                toThrow.transform.position = Vector2.Lerp(startPos, endPos, perctenage);
+                toThrow.transform.localScale = Vector2.Lerp(startScale,startScale*2,GV.ws.thrownAnim.Evaluate(perctenage));
+            }
             yield return null;
         }
         Potion p = toThrow.GetComponent<Potion>();
@@ -113,8 +127,8 @@ public class Player : MonoBehaviour
     private void MakePotionPressed()
     {
         //So many raycasts checking for a direction, could be made more generic by having one location for all checks
-        RaycastHit2D rh = Physics2D.Raycast((Vector2)transform.position + localHandPos, new Vector2(-1,0), 1f, (1 << LayerMask.NameToLayer("Cauldron")));
-        if(rh)
+        RaycastHit2D rh = RaycastOutFromHand(1, (1 << LayerMask.NameToLayer("Cauldron")));
+        if (rh)
         {
             Potion newPotion = Potion.CreatePotion(rh.transform.GetComponent<Cauldron>().cauldronIngredients);
             PickupObject(newPotion.gameObject);
@@ -126,7 +140,7 @@ public class Player : MonoBehaviour
         if (carryingObject)
         {
             GameObject droppedObj = DeattachCarryingItem();
-            droppedObj.transform.localPosition = droppedObj.transform.localPosition + new Vector3(GV.Player_Drop_Distance, 0, 0);
+            droppedObj.transform.localPosition = droppedObj.transform.localPosition + (Vector3)(lastMovedDir.normalized * GV.Player_Drop_Distance);
         }
 
     }

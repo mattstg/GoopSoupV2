@@ -80,7 +80,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1351131185641180}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
@@ -129,7 +129,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5619dba5847ac7f419492998c2179ef4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ingredient:
+    r: 0.5
+    g: 0.5
+    b: 0.5
   symbols: {fileID: 212829420136295098}
+  sr: {fileID: 0}
 --- !u!212 &212108483559780864
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -161,8 +166,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 228690239
+  m_SortingLayer: 8
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 93bd7055f157ea249b44d094f6e035d0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

@@ -18,7 +18,7 @@ public class Potion : MonoBehaviour  {
             Monolith m = rh.transform.GetComponent<Monolith>();
             if (m)
             {
-                //if (ingredient.IngredientsAreSimilar(m.ingredient))
+                if (ingredient.IngredientsAreSimilar(m.ingredient))
                     m.DestroyMonolith();
             }
             else
