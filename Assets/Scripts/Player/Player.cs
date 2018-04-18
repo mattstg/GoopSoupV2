@@ -12,9 +12,8 @@ public class Player : MonoBehaviour
     readonly float PLAYER_MOVE_VELO = 3;
 
     //Carry mechanics
-    bool isCarrying = false;
     Vector2 localHandPos;
-    GameObject carryingObject;
+    Carried carryingObject;
 
     public void PlayerSpawned()
     {
@@ -44,13 +43,13 @@ public class Player : MonoBehaviour
         InputManager.InputInfo inputInfo = inputManager.GetInputInfo();
 
         if (inputInfo.pickDropPressed)
-            if (isCarrying)
+            if (carryingObject)
                 DroppedPresed();
             else
                 PickupPressed();
 
         if (inputInfo.makePotionPressed)
-            if (isCarrying)
+            if (carryingObject)
             {
                 GameObject toThrow = DeattachCarryingItem();
                 StartCoroutine(ThrowCarriedObject(toThrow, GV.Player_Throw_Distance,GV.Player_Throw_Time));
@@ -76,14 +75,15 @@ public class Player : MonoBehaviour
     //reseting back to the proper values is easier
     private void PickupObject(GameObject toPickUp)
     {
-        toPickUp.transform.SetParent(transform);
-        toPickUp.transform.localPosition = localHandPos;
-        carryingObject = toPickUp;
-        Collider2D coli = toPickUp.GetComponent<Collider2D>();
-        Rigidbody2D rb = toPickUp.GetComponent<Rigidbody2D>();
-        if(coli) coli.enabled = false;
-        if (rb) rb.bodyType = RigidbodyType2D.Kinematic;
-        isCarrying = true;
+        carryingObject = Carried.PickUpObject(toPickUp, transform, localHandPos);
+        //toPickUp.transform.SetParent(transform);
+        //toPickUp.transform.localPosition = localHandPos;
+        //carryingObject = toPickUp;
+        //Collider2D coli = toPickUp.GetComponent<Collider2D>();
+        //Rigidbody2D rb = toPickUp.GetComponent<Rigidbody2D>();
+        //if(coli) coli.enabled = false;
+        //if (rb) rb.bodyType = RigidbodyType2D.Kinematic;
+        //isCarrying = true;
         
     }
 
@@ -135,13 +135,18 @@ public class Player : MonoBehaviour
     //and reset things back to original, here we assume the rigidbody should be dynamic... dangerous
     private GameObject DeattachCarryingItem()
     {
-        GameObject toRet = carryingObject;
-        Collider2D coli = toRet.GetComponent<Collider2D>();
-        Rigidbody2D rb = toRet.GetComponent<Rigidbody2D>();
-        if (coli) coli.enabled = true;
-        if (rb) rb.bodyType = RigidbodyType2D.Dynamic;
-        isCarrying = false;
-        carryingObject.transform.SetParent(null); //This is bad, what if it belonged to a parent group?
+        //GameObject toRet = carryingObject;
+        //Collider2D coli = toRet.GetComponent<Collider2D>();
+        //Rigidbody2D rb = toRet.GetComponent<Rigidbody2D>();
+        //if (coli) coli.enabled = true;
+        //if (rb) rb.bodyType = RigidbodyType2D.Dynamic;
+        //isCarrying = false;
+        //carryingObject.transform.SetParent(null); //This is bad, what if it belonged to a parent group?
+        //carryingObject = null;
+        //return toRet;
+
+        GameObject toRet = carryingObject.gameObject;
+        carryingObject.ObjectDropped();
         carryingObject = null;
         return toRet;
     }

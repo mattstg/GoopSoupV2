@@ -37,6 +37,7 @@ public class MonolithManager : GenericManager<Monolith> {
         if(timeTillnextMonolith <= Time.time)
         {
             AddItem(Monolith.SpawnRandomMonolith());
+            timeTillnextMonolith = Time.time + GV.Monolith_Spawn_Monolith_Rate;
         }
     }
 }

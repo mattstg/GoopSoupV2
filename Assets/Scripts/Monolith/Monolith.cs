@@ -4,13 +4,17 @@ using UnityEngine;
 
 public class Monolith : MonoBehaviour, IUpdatable
 {
-    Ingredient ingredient;
+    static readonly float Monolith_Death_Time = 3;
+
+    public Ingredient ingredient;
     public SpriteRenderer symbols;
+    public SpriteRenderer sr;
     string monsterType;
     float timeOfNextMonsterSpawn;
 
     public void Initialize()
     {
+        sr = GetComponent<SpriteRenderer>();
         ingredient = Ingredient.RandomIngredient();
         symbols.color = ingredient.ToColor();
         monsterType = MonsterFactory.Instance.GetRandomMonsterName();
@@ -32,5 +36,24 @@ public class Monolith : MonoBehaviour, IUpdatable
         toRet.Initialize();
         monoObj.transform.position = GV.GetRandomSpotInMap();
         return toRet;
+    }
+
+    public void DestroyMonolith()
+    {
+        MonolithManager.Instance.RemoveItem(this);
+        GetComponent<Collider2D>().enabled = false;
+        StartCoroutine(MonolithDestructionEffect());
+    }
+
+    IEnumerator MonolithDestructionEffect()
+    {
+        float timeOfDeath = Time.time + Monolith_Death_Time;
+        while(Time.time < timeOfDeath)
+        {
+            float p = 1 - ((timeOfDeath - Time.time) / Monolith_Death_Time);
+            sr.color = Color.Lerp(Color.white, ingredient.ToColor(), p);
+            yield return null;
+        }
+        GameObject.Destroy(gameObject);
     }
 }

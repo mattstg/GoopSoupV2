@@ -5,10 +5,26 @@ using UnityEngine;
 public class Potion : MonoBehaviour  {
 
     public Ingredient ingredient;
-    string explosionResourcePath; 
+    string explosionResourcePath;
+    float explosionRadius = 1.5f;
+    
 
 	public void PotionExplodes()
     {
+        int expLayerMask = (1 << LayerMask.NameToLayer("Monolith"));
+        RaycastHit2D[] rhs = Physics2D.CircleCastAll(transform.position, explosionRadius, new Vector2(), 0, expLayerMask);
+        foreach(RaycastHit2D rh in rhs)
+        {
+            Monolith m = rh.transform.GetComponent<Monolith>();
+            if (m)
+            {
+                //if (ingredient.IngredientsAreSimilar(m.ingredient))
+                    m.DestroyMonolith();
+            }
+            else
+                Debug.LogError("All monoliths should have mono script, what happened?");
+
+        }
         GameObject.Destroy(gameObject);
         //StartCoroutine(Exploding(transform.position)); --Implemented in later feature
     }

@@ -17,7 +17,7 @@ public class GV {
     public static readonly float Plants_Breed_Mutation_Chance = .1f;
     public static readonly Vector2 Plants_Breed_Mutation_Variation_Range = new Vector2(.1f,.3f);
 
-    public static readonly float Ingredient_Similarity_Range = .2f; //If plants ingredients within X of each other, are considered similar
+    public static readonly float Ingredient_Similarity_Range = .3f; //If plants ingredients within X of each other, are considered similar
 
     public static readonly float Player_Drop_Distance = -.33f;
     public static readonly Vector2 Player_Throw_Distance = new Vector2(-1.6f,0);
