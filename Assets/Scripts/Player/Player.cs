@@ -128,7 +128,7 @@ public class Player : MonoBehaviour
     {
         //So many raycasts checking for a direction, could be made more generic by having one location for all checks
         RaycastHit2D rh = RaycastOutFromHand(1, (1 << LayerMask.NameToLayer("Cauldron")));
-        if (rh)
+        if (rh && rh.transform.GetComponent<Cauldron>())
         {
             Potion newPotion = Potion.CreatePotion(rh.transform.GetComponent<Cauldron>().cauldronIngredients);
             PickupObject(newPotion.gameObject);
