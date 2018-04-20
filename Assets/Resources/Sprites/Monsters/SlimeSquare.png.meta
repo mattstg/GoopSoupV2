@@ -1,12 +1,14 @@
 fileFormatVersion: 2
-guid: 75c89905aac7e6d49ae931142a649b8c
-timeCreated: 1524188730
+guid: bd0f8f47f4234d64dbb5b504d837c95f
+timeCreated: 1524188731
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Bat_0
-    21300002: Bat_1
-    21300004: Bat_2
+    21300000: SlimeSquare_0
+    21300002: SlimeSquare_1
+    21300004: SlimeSquare_2
+    21300006: SlimeSquare_3
+    21300008: SlimeSquare_4
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -133,7 +135,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bat_0
+      name: SlimeSquare_0
       rect:
         serializedVersion: 2
         x: 0
@@ -147,7 +149,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Bat_1
+      name: SlimeSquare_1
       rect:
         serializedVersion: 2
         x: 16
@@ -161,10 +163,38 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Bat_2
+      name: SlimeSquare_2
       rect:
         serializedVersion: 2
         x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SlimeSquare_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: SlimeSquare_4
+      rect:
+        serializedVersion: 2
+        x: 64
         y: 0
         width: 16
         height: 16

@@ -1,12 +1,13 @@
 fileFormatVersion: 2
-guid: 75c89905aac7e6d49ae931142a649b8c
+guid: 17ca5b49b4e3a5d43b98f17c525640a9
 timeCreated: 1524188730
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Bat_0
-    21300002: Bat_1
-    21300004: Bat_2
+    21300000: Dog_0
+    21300002: Dog_1
+    21300004: Dog_2
+    21300006: Dog_3
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -133,7 +134,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bat_0
+      name: Dog_0
       rect:
         serializedVersion: 2
         x: 0
@@ -147,7 +148,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Bat_1
+      name: Dog_1
       rect:
         serializedVersion: 2
         x: 16
@@ -161,10 +162,24 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Bat_2
+      name: Dog_2
       rect:
         serializedVersion: 2
         x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Dog_3
+      rect:
+        serializedVersion: 2
+        x: 48
         y: 0
         width: 16
         height: 16

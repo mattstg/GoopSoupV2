@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: b7ae3e61e018756468a7df3cbd900d36
-timeCreated: 1522334429
+guid: a2eddd2789d31ec46a32bda3d3c69abd
+timeCreated: 1524188730
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -11,8 +11,6 @@ TextureImporter:
     21300008: Chicken_4
     21300010: Chicken_5
     21300012: Chicken_6
-    21300014: Chicken_7
-    21300016: Chicken_8
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -55,7 +53,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 33
+  spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -227,34 +225,6 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 96
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Chicken_7
-      rect:
-        serializedVersion: 2
-        x: 112
-        y: 0
-        width: 16
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: Chicken_8
-      rect:
-        serializedVersion: 2
-        x: 128
         y: 0
         width: 16
         height: 16

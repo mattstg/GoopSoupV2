@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: fc357f5b054047f46b2d159d59216642
-timeCreated: 1451620089
+guid: 81a7ec5a6abb33c478a18ef179a38994
+timeCreated: 1524188730
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -13,29 +13,6 @@ TextureImporter:
     21300012: Slime_6
     21300014: Slime_7
     21300016: Slime_8
-    21300018: Slime_9
-    21300020: Slime_10
-    21300022: Slime_11
-    21300024: Slime_12
-    21300026: Slime_13
-    21300028: Slime_14
-    21300030: Slime_15
-    21300032: SlimeC_0
-    21300034: SlimeC_1
-    21300036: SlimeC_2
-    21300038: SlimeC_3
-    21300040: SlimeC_4
-    21300042: SlimeC_5
-    21300044: SlimeC_6
-    21300046: SlimeC_7
-    21300048: SlimeC_8
-    21300050: SlimeC_9
-    21300052: SlimeC_10
-    21300054: SlimeC_11
-    21300056: SlimeC_12
-    21300058: SlimeC_13
-    21300060: SlimeC_14
-    21300062: SlimeC_15
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -59,12 +36,12 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
-  textureFormat: -3
+  textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
-    aniso: 16
+    filterMode: -1
+    aniso: -1
     mipBias: -1
     wrapU: 1
     wrapV: 1
@@ -78,7 +55,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 20
+  spritePixelsToUnits: 100
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -92,7 +69,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -102,7 +79,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -112,7 +89,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -122,7 +99,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -132,7 +109,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -142,7 +119,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -152,7 +129,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 0
+    textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0

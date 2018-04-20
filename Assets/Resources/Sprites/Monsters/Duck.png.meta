@@ -1,12 +1,15 @@
 fileFormatVersion: 2
-guid: 75c89905aac7e6d49ae931142a649b8c
-timeCreated: 1524188730
+guid: bfc4d06f9ca259942b647d9bdd336b28
+timeCreated: 1524188731
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Bat_0
-    21300002: Bat_1
-    21300004: Bat_2
+    21300000: Duck_0
+    21300002: Duck_1
+    21300004: Duck_2
+    21300006: Duck_3
+    21300008: Duck_4
+    21300010: Duck_5
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -133,7 +136,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bat_0
+      name: Duck_0
       rect:
         serializedVersion: 2
         x: 0
@@ -147,7 +150,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Bat_1
+      name: Duck_1
       rect:
         serializedVersion: 2
         x: 16
@@ -161,10 +164,52 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: Bat_2
+      name: Duck_2
       rect:
         serializedVersion: 2
         x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Duck_3
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Duck_4
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: Duck_5
+      rect:
+        serializedVersion: 2
+        x: 80
         y: 0
         width: 16
         height: 16

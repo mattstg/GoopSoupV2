@@ -9,47 +9,47 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1559969335561516}
+  m_RootGameObject: {fileID: 1867298233940886}
   m_IsPrefabParent: 1
---- !u!1 &1559969335561516
+--- !u!1 &1867298233940886
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 5
   m_Component:
-  - component: {fileID: 4108438719082464}
-  - component: {fileID: 212895286334986604}
-  - component: {fileID: 50306080682543338}
-  - component: {fileID: 114360773529692354}
-  - component: {fileID: 58348634534108396}
+  - component: {fileID: 4355125783299698}
+  - component: {fileID: 50941456154763850}
+  - component: {fileID: 212298936106238064}
+  - component: {fileID: 61859218815419132}
+  - component: {fileID: 114236921720010302}
   m_Layer: 11
-  m_Name: Wisp
+  m_Name: Goat
   m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4108438719082464
+--- !u!4 &4355125783299698
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1559969335561516}
+  m_GameObject: {fileID: 1867298233940886}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.378, z: 0}
+  m_LocalPosition: {x: 0.247, y: -0.004, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &50306080682543338
+--- !u!50 &50941456154763850
 Rigidbody2D:
   serializedVersion: 4
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1559969335561516}
+  m_GameObject: {fileID: 1867298233940886}
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
@@ -63,12 +63,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!58 &58348634534108396
-CircleCollider2D:
+--- !u!61 &61859218815419132
+BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1559969335561516}
+  m_GameObject: {fileID: 1867298233940886}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
@@ -76,40 +76,50 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.16, y: 0.16}
+    newSize: {x: 0.16, y: 0.16}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
   serializedVersion: 2
-  m_Radius: 0.08
---- !u!114 &114360773529692354
+  m_Size: {x: 0.16, y: 0.16}
+  m_EdgeRadius: 0
+--- !u!114 &114236921720010302
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1559969335561516}
+  m_GameObject: {fileID: 1867298233940886}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 886577c3b06c86a41884add3e8bbb0ba, type: 3}
+  m_Script: {fileID: 11500000, guid: 0de93128e72770c4895988b5576e543b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ingredientInfo:
-    r: 0
-    g: 0
-    b: 0
+    r: 0.5
+    g: 0.5
+    b: 0.5
   bodyInfo:
-    maxHp: 2
-    accel: 1
-    maxSpeed: 3
+    maxHp: 1
+    accel: 0.3
+    maxSpeed: 0.3
     hp: 0
   animInfo:
-    spriteName: Wisp
-    animationSpeed: 0.3
+    spriteName: Goat
+    animationSpeed: 0.6
   aiInfo:
-    aggroRange: 5
-    attentionSpan: 2
---- !u!212 &212895286334986604
+    aggroRange: 2
+    attentionSpan: 4
+--- !u!212 &212298936106238064
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1559969335561516}
+  m_GameObject: {fileID: 1867298233940886}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -138,7 +148,7 @@ SpriteRenderer:
   m_SortingLayerID: -1839312757
   m_SortingLayer: 1
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: a390a0207e16e954d8940074148da589, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 62ac7f10a0dd1d848882e8c89186c84b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
