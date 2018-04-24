@@ -15,6 +15,12 @@ public class Monster : MonoBehaviour, IPoolable {
     public AnimInfo animInfo;
     public AIInfo aiInfo;
 
+    public void InitializeMonsterColor(Ingredient ingr)
+    {
+        ingredientInfo = new Ingredient(ingr);
+        GetComponent<SpriteRenderer>().color = ingredientInfo.ToColor();
+    }
+
     public virtual void Initialize()
     {
         
@@ -25,11 +31,6 @@ public class Monster : MonoBehaviour, IPoolable {
 
 	public virtual void UpdateMonster(float dt){
         ai.UpdateParameters(dt); //This code updates the AI, who in turn calls BehaviourCall
-	}
-
-	public virtual void OnCollisionEnter2D(Collision2D coli)
-	{
-
 	}
 
 	public virtual void OnTriggerEnter2D(Collider2D coli)
@@ -79,9 +80,19 @@ public class Monster : MonoBehaviour, IPoolable {
     public void MonsterDies()
     {
         MonsterManager.Instance.RemoveMonster(this);
-
     }
-   
+
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.transform.CompareTag("Player"))
+        {
+            Player p = collision.gameObject.GetComponent<Player>();
+            p.TakeDamage(1);
+            ai.MonsterHitPlayer();
+        }
+    }
+
+
     [System.Serializable]
     public class BodyInfo
     {

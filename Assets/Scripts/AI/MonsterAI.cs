@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class MonsterAI  {
 
-    public static string[] stateNames = { "Idle", "Die", "AttackTarget", "ChaseTarget", "Wander" };
+    public static string[] stateNames = { "Idle", "Die", "AttackTarget", "ChaseTarget", "Wander", "Retreat" };
 
     Monster monster;
     Monster.AIInfo aiInfo;
-	Animator anim;
+    Animator anim;
 	BehaviourManager behaviourManager;
 
     int currentStateNameHash;       //State machines store thier name as hash values (int representation of the data)
@@ -32,6 +32,7 @@ public class MonsterAI  {
         stateDict.Add("AttackTarget", new AttackState(monster));
         stateDict.Add("ChaseTarget", new ChaseState(monster));
         stateDict.Add("Wander", new WanderState(monster));
+        stateDict.Add("Retreat", new RetreatState(monster));
     }
 
 	public void UpdateParameters(float dt)
@@ -79,6 +80,11 @@ public class MonsterAI  {
         //Check if dead
         if (monster.bodyInfo.hp <= 0)
             anim.SetTrigger("HasDied");
+    }
+
+    public void MonsterHitPlayer()
+    {
+        anim.SetTrigger("Retreat");
     }
 
     //This is called by the behaviour manager, which is called by the state machine

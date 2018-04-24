@@ -15,6 +15,7 @@ public class Plant : MonoBehaviour {
         ingredient = new Ingredient(_ingredient); //Clone it so dont all share
         gameObject.layer = LayerMask.NameToLayer("Plant");
         gameObject.tag = "Plant";
+        gameObject.name = "Plant";
 
         sprite = _sprite;
         sr = gameObject.AddComponent<SpriteRenderer>();

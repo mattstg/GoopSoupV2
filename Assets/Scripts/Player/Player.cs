@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    readonly static float Player_Dmg_Invunerable_Time = 2;
+    readonly static float Player_Hp_Max = 10;
+
     bool initialized = false;
     InputManager inputManager;
     Rigidbody2D rb;
@@ -11,6 +14,9 @@ public class Player : MonoBehaviour
     Vector2 lastMovedDir;
     //Movement
     readonly float PLAYER_MOVE_VELO = 3;
+    float playerHp = Player_Hp_Max;
+    float timeAtLastDamage;
+    
 
     //Carry mechanics
     Vector2 localHandPos;
@@ -20,6 +26,7 @@ public class Player : MonoBehaviour
     {
         if (!initialized)
             PlayerFirstInitialize();
+        playerHp = Player_Hp_Max;
     }
 
     public void PlayerFirstInitialize()
@@ -122,7 +129,17 @@ public class Player : MonoBehaviour
             toThrow.GetComponent<Collider2D>().enabled = true;
     }
 
-    
+    public void TakeDamage(float dmg)
+    {
+        if (Time.time > timeAtLastDamage + Player_Dmg_Invunerable_Time)
+        {
+            playerHp -= dmg;
+            HealthPopupManager.Instance.ModHP(transform, dmg);
+            if (playerHp <= 0)
+                PlayerManager.Instance.PlayerDied();
+            timeAtLastDamage = Time.time;
+        }
+    }
 
     private void MakePotionPressed()
     {

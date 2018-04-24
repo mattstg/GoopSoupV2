@@ -85,16 +85,16 @@ public class MonsterFactory {
     {
         string monsterName = GV.GetRandomElemFromArr<string>(monsterNames);
         Vector2 location = GV.GetRandomSpotInMap();
-        return CreateMonster(monsterName, location);
+        return CreateMonster(monsterName, location, Ingredient.RandomIngredient());
     }
 
     /// <summary>
     /// Creates named monster at random location
     /// </summary>
-    public Monster CreateMonster(string monsterName)
+    public Monster CreateMonster(string monsterName, Ingredient ingr)
     {
         Vector2 location = GV.GetRandomSpotInMap();
-        return CreateMonster(monsterName, location);
+        return CreateMonster(monsterName, location, ingr);
     }
 
     /// <summary>
@@ -103,7 +103,7 @@ public class MonsterFactory {
     public Monster CreateMonster(Vector2 loc)
     {
         string monsterName = GV.GetRandomElemFromArr<string>(monsterNames);
-        return CreateMonster(monsterName, loc);
+        return CreateMonster(monsterName, loc, Ingredient.RandomIngredient());
     }
 
 
@@ -111,7 +111,7 @@ public class MonsterFactory {
     /// <summary>
     /// Creates a monster of given name at the location
     /// </summary>
-    public Monster CreateMonster(string monsterName, Vector2 loc)
+    public Monster CreateMonster(string monsterName, Vector2 loc, Ingredient monsterIngredient)
     {
         GameObject toRetObj = null;
         IPoolable poolable = ObjectPool.Instance.RetrieveFromPool(monsterName); //atm pool is not functional, will always return null
@@ -127,7 +127,7 @@ public class MonsterFactory {
             toRet.transform.position = loc;
             MonsterManager.Instance.AddMonster(toRet);
         }
-
+        toRet.InitializeMonsterColor(monsterIngredient);
         return toRet;
     }
 
@@ -151,6 +151,9 @@ public class MonsterFactory {
         //Atm there is only one type of AI (State machine), so we will initialize that inside of Monster
 
         newMonster.Initialize();
+        if (GV.DEBUG_Monsters_Triggers)
+            newMonsterObj.GetComponent<Collider2D>().isTrigger = true;
+
         return newMonster;
     }
 

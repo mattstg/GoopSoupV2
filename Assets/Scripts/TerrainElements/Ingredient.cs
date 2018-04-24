@@ -53,6 +53,9 @@ public class Ingredient  {
     /// </summary>
     public bool IngredientsAreSimilar(Ingredient otherIngredient)
     {
+        if (GV.DEBUG_Ingredients_Always_Similar)
+            return true;
+
         if (GV.WithinRange(r, otherIngredient.r, GV.Ingredient_Similarity_Range)
             && GV.WithinRange(g, otherIngredient.g, GV.Ingredient_Similarity_Range)
             && GV.WithinRange(b, otherIngredient.b, GV.Ingredient_Similarity_Range))

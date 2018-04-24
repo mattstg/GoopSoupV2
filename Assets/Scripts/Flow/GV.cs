@@ -30,6 +30,10 @@ public class GV {
     public static readonly int Monolith_Spawn_Monolith_Rate = 120; //Number of seconds to spawn a new monolith
     public static readonly int Monolith_Spawn_Monster_Rate = 12; //Every N seconds spawns monster near monolith
 
+    public static readonly bool DEBUG_Ingredients_Always_Similar = true;
+    public static readonly bool DEBUG_Monsters_Triggers = false;
+
+
     public static T GetRandomEnum<T>() where T : struct, IConvertible
     {
         if (!typeof(T).IsEnum)

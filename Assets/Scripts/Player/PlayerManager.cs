@@ -54,7 +54,7 @@ public class PlayerManager
 
     public void PlayerDied()
     {
-
+        SpawnPlayerAtLoc(GV.GetRandomSpotInMap());
     }
 
     public void SpawnPlayerAtLoc(Vector2 atLoc)

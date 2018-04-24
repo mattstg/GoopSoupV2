@@ -24,7 +24,7 @@ public class Monolith : MonoBehaviour, IUpdatable
     {
         if(timeOfNextMonsterSpawn <= Time.time)
         {
-            MonsterFactory.Instance.CreateMonster(monsterType, GV.GetRandomSpotNear(transform.position, new Vector2(1, GV.Monster_Breed_SpawnDist)));
+            MonsterFactory.Instance.CreateMonster(monsterType, GV.GetRandomSpotNear(transform.position, new Vector2(1, GV.Monster_Breed_SpawnDist)),ingredient);
             timeOfNextMonsterSpawn = Time.time + GV.Monolith_Spawn_Monster_Rate;
         }
     }

@@ -3,35 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Potion : MonoBehaviour  {
+   
 
     public Ingredient ingredient;
+    
     string explosionResourcePath;
     float explosionRadius = 1.5f;
     
 
 	public void PotionExplodes()
     {
-        int expLayerMask = (1 << LayerMask.NameToLayer("Monolith"));
-        RaycastHit2D[] rhs = Physics2D.CircleCastAll(transform.position, explosionRadius, new Vector2(), 0, expLayerMask);
-        foreach(RaycastHit2D rh in rhs)
-        {
-            Monolith m = rh.transform.GetComponent<Monolith>();
-            if (m)
-            {
-                if (ingredient.IngredientsAreSimilar(m.ingredient))
-                    m.DestroyMonolith();
-            }
-            else
-                Debug.LogError("All monoliths should have mono script, what happened?");
-
-        }
+        Explosion.CreateExplosion(transform.position, ingredient);
         GameObject.Destroy(gameObject);
-        //StartCoroutine(Exploding(transform.position)); --Implemented in later feature
     }
 
-    IEnumerator Exploding(Vector2 loc)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        yield return null;
+        if(collision.transform.CompareTag("Monster"))
+            PotionExplodes();
     }
 
     public static Potion CreatePotion(Ingredient _ingredient)

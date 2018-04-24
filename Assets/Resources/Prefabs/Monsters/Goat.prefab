@@ -105,8 +105,8 @@ MonoBehaviour:
     b: 0.5
   bodyInfo:
     maxHp: 1
-    accel: 0.3
-    maxSpeed: 0.3
+    accel: 1
+    maxSpeed: 1
     hp: 0
   animInfo:
     spriteName: Goat
