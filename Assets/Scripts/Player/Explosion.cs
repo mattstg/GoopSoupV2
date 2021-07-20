@@ -31,10 +31,11 @@ public class Explosion : MonoBehaviour {
         sr.sortingLayerName = "Potion";
 
         //Do dmg calcs
-        int expLayerMask = (1 << LayerMask.NameToLayer("Monolith") | (1 << LayerMask.NameToLayer("Monster")));
+        int expLayerMask = LayerMask.GetMask("Monolith", "Monster");  // (1 << LayerMask.NameToLayer("Monolith") | (1 << LayerMask.NameToLayer("Monster")));
         RaycastHit2D[] rhs = Physics2D.CircleCastAll(transform.position, Potion_Explode_Scale_Max, new Vector2(), 0, expLayerMask);
         foreach (RaycastHit2D rh in rhs)
         {
+            
             {
                 Monolith m = rh.transform.GetComponent<Monolith>();
                 if (m)
@@ -43,6 +44,7 @@ public class Explosion : MonoBehaviour {
                         m.DestroyMonolith();
                 }
             }
+
             {
                 Monster m = rh.transform.GetComponent<Monster>();
                 if (m)
@@ -53,7 +55,7 @@ public class Explosion : MonoBehaviour {
 
             }
         }
-
+        
         //Anim co-routine
         StartCoroutine(UpdateAnim());
     }

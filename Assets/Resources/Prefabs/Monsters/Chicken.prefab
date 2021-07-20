@@ -133,6 +133,7 @@ MonoBehaviour:
   aiInfo:
     aggroRange: 1
     attentionSpan: 1
+  spawningMonolith: {fileID: 0}
 --- !u!61 &61866245557619020
 BoxCollider2D:
   m_ObjectHideFlags: 0

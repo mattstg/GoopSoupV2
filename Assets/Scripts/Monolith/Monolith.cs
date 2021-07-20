@@ -11,9 +11,11 @@ public class Monolith : MonoBehaviour, IUpdatable
     public SpriteRenderer sr;
     string monsterType;
     float timeOfNextMonsterSpawn;
+    HashSet<Monster> monsters;
 
     public void Initialize()
     {
+        monsters = new HashSet<Monster>();
         sr = GetComponent<SpriteRenderer>();
         ingredient = Ingredient.RandomIngredient();
         symbols.color = ingredient.ToColor();
@@ -22,9 +24,11 @@ public class Monolith : MonoBehaviour, IUpdatable
 
     public void IUpdate(float dt)
     {
+        
+
         if(timeOfNextMonsterSpawn <= Time.time)
         {
-            MonsterFactory.Instance.CreateMonster(monsterType, GV.GetRandomSpotNear(transform.position, new Vector2(1, GV.Monster_Breed_SpawnDist)),ingredient);
+            monsters.Add(MonsterFactory.Instance.CreateMonster(monsterType, GV.GetRandomSpotNear(transform.position, new Vector2(1, GV.Monster_Breed_SpawnDist)),ingredient, this));
             timeOfNextMonsterSpawn = Time.time + GV.Monolith_Spawn_Monster_Rate;
         }
     }
@@ -38,8 +42,15 @@ public class Monolith : MonoBehaviour, IUpdatable
         return toRet;
     }
 
+    public void MonsterDied(Monster toRemove)
+    {
+        monsters.Remove(toRemove);
+    }
+
     public void DestroyMonolith()
     {
+        foreach (Monster m in monsters)
+            m.MonolithDied();
         MonolithManager.Instance.RemoveItem(this);
         GetComponent<Collider2D>().enabled = false;
         StartCoroutine(MonolithDestructionEffect());

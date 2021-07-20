@@ -29,6 +29,7 @@ public class AnimationFactory  {
     public void SetupAnimationForMonster(Monster monster)
     {
         string animName = monster.animInfo.spriteName;
+        //Debug.Log("animName: " + animName);
         if(string.IsNullOrEmpty(animName))
         {
             Debug.LogError("Sprite name for monster: " + monster.name + " is empty, no animations created");

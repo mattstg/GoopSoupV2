@@ -61,6 +61,7 @@ MonoBehaviour:
   aiInfo:
     aggroRange: 5
     attentionSpan: 2
+  spawningMonolith: {fileID: 0}
 --- !u!50 &50145215982443136
 Rigidbody2D:
   serializedVersion: 4

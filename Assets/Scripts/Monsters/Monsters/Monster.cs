@@ -14,6 +14,7 @@ public class Monster : MonoBehaviour, IPoolable {
     public BodyInfo bodyInfo;
     public AnimInfo animInfo;
     public AIInfo aiInfo;
+    public Monolith spawningMonolith;
 
     public void InitializeMonsterColor(Ingredient ingr)
     {
@@ -21,9 +22,9 @@ public class Monster : MonoBehaviour, IPoolable {
         GetComponent<SpriteRenderer>().color = ingredientInfo.ToColor();
     }
 
-    public virtual void Initialize()
+    public virtual void Initialize(Monolith _spawningMonolith)
     {
-        
+        spawningMonolith = _spawningMonolith;
         bodyInfo.hp = bodyInfo.maxHp;
         rb = GetComponent<Rigidbody2D>();
 		ai = new MonsterAI (this);          //Atm there is only one kind of AI, so it is just initalized in here
@@ -49,6 +50,11 @@ public class Monster : MonoBehaviour, IPoolable {
         //Set active again, turn on anim and reset values and etc
         ai.Depooled();
 	}
+
+    public void MonolithDied()
+    {
+        ai.MonolithDied();
+    }
 
 	public GameObject GetGameObject { get { return gameObject; } }
 
@@ -79,6 +85,9 @@ public class Monster : MonoBehaviour, IPoolable {
 
     public void MonsterDies()
     {
+        if (spawningMonolith)
+            spawningMonolith.MonsterDied(this);
+                
         MonsterManager.Instance.RemoveMonster(this);
     }
 
@@ -121,4 +130,26 @@ public class Monster : MonoBehaviour, IPoolable {
     {
         public float r, g, b;
     }
+
+    public class Animal
+    {
+        protected string name, species;
+        protected int numOfLegs;
+
+        public Animal(string name, string species, int numOfLegs)
+        {
+            this.name = name;
+            this.species = species;
+            this.numOfLegs = numOfLegs;
+        }
+    }
+
+    public class Dog : Animal
+    {
+        public Dog(string name) : base(name,"Dog",4)
+        {
+        }
+    }
+
+
 }

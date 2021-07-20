@@ -159,3 +159,4 @@ MonoBehaviour:
   aiInfo:
     aggroRange: 2
     attentionSpan: 4
+  spawningMonolith: {fileID: 0}

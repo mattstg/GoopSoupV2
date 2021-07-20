@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class MonsterFactory {
     #region Singleton
@@ -17,6 +18,11 @@ public class MonsterFactory {
             return instance;
         }
     }
+
+    private MonsterFactory()
+    {
+        monsterLayer = LayerMask.NameToLayer("Monster");
+    }
     #endregion
 
     Dictionary<string, GameObject> monsterPrefabDict;
@@ -27,10 +33,7 @@ public class MonsterFactory {
 
     
 
-    private MonsterFactory()
-    {
-        monsterLayer = LayerMask.NameToLayer("Monster");
-    }
+    
 
     public string GetRandomMonsterName()
     {
@@ -46,6 +49,7 @@ public class MonsterFactory {
         {
             //Safety checks, did they create the monster properly?  
             Monster newMonster = prefab.GetComponent<Monster>();
+
             if (newMonster)
             {
                 if (!newMonster.CompareTag("Monster"))
@@ -71,8 +75,11 @@ public class MonsterFactory {
             }
         }
 
+        //monsterNames = monsterPrefabDict.Keys.ToArray();
         List<string> tempList = new List<string>(monsterPrefabDict.Keys);
         monsterNames = tempList.ToArray();
+
+        
     }
 
 
@@ -85,7 +92,7 @@ public class MonsterFactory {
     {
         string monsterName = GV.GetRandomElemFromArr<string>(monsterNames);
         Vector2 location = GV.GetRandomSpotInMap();
-        return CreateMonster(monsterName, location, Ingredient.RandomIngredient());
+        return CreateMonster(monsterName, location, Ingredient.RandomIngredient(), null);
     }
 
     /// <summary>
@@ -94,7 +101,7 @@ public class MonsterFactory {
     public Monster CreateMonster(string monsterName, Ingredient ingr)
     {
         Vector2 location = GV.GetRandomSpotInMap();
-        return CreateMonster(monsterName, location, ingr);
+        return CreateMonster(monsterName, location, ingr, null);
     }
 
     /// <summary>
@@ -103,7 +110,7 @@ public class MonsterFactory {
     public Monster CreateMonster(Vector2 loc)
     {
         string monsterName = GV.GetRandomElemFromArr<string>(monsterNames);
-        return CreateMonster(monsterName, loc, Ingredient.RandomIngredient());
+        return CreateMonster(monsterName, loc, Ingredient.RandomIngredient(), null);
     }
 
 
@@ -111,14 +118,16 @@ public class MonsterFactory {
     /// <summary>
     /// Creates a monster of given name at the location
     /// </summary>
-    public Monster CreateMonster(string monsterName, Vector2 loc, Ingredient monsterIngredient)
+    public Monster CreateMonster(string monsterName, Vector2 loc, Ingredient monsterIngredient, Monolith creator)
     {
         GameObject toRetObj = null;
         IPoolable poolable = ObjectPool.Instance.RetrieveFromPool(monsterName); //atm pool is not functional, will always return null
+        //toRetObj = GameObject.Instantiate(monsterPrefabDict[monsterName]);
+
         if (poolable != null)
             toRetObj = poolable.GetGameObject;
         else
-            toRetObj = _CreateMonster(monsterName).gameObject;
+            toRetObj = _CreateMonster(monsterName, creator).gameObject;
         Monster toRet = toRetObj.GetComponent<Monster>();
         if (!toRet)
             Debug.LogError("Something went wrong in monster factory, object: " + toRetObj.name + " did not contain a monster script. Returning Null");
@@ -133,7 +142,7 @@ public class MonsterFactory {
 
 
     //Internal call, used by the factory
-    private Monster _CreateMonster(string monsterName)
+    private Monster _CreateMonster(string monsterName, Monolith spawningMonolith)
     {
         if(!monsterPrefabDict.ContainsKey(monsterName))
         {
@@ -150,7 +159,7 @@ public class MonsterFactory {
         //Setup the AI
         //Atm there is only one type of AI (State machine), so we will initialize that inside of Monster
 
-        newMonster.Initialize();
+        newMonster.Initialize(spawningMonolith);
         if (GV.DEBUG_Monsters_Triggers)
             newMonsterObj.GetComponent<Collider2D>().isTrigger = true;
 

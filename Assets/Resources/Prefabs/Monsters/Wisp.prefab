@@ -133,6 +133,7 @@ MonoBehaviour:
   aiInfo:
     aggroRange: 5
     attentionSpan: 2
+  spawningMonolith: {fileID: 0}
 --- !u!58 &58348634534108396
 CircleCollider2D:
   m_ObjectHideFlags: 0

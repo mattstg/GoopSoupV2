@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MonsterAI  {
 
-    public static string[] stateNames = { "Idle", "Die", "AttackTarget", "ChaseTarget", "Wander", "Retreat" };
+    public static string[] stateNames = { "Idle", "Die", "AttackTarget", "ChaseTarget", "Wander", "Retreat", "Aggro" };
 
     Monster monster;
     Monster.AIInfo aiInfo;
@@ -33,6 +33,7 @@ public class MonsterAI  {
         stateDict.Add("ChaseTarget", new ChaseState(monster));
         stateDict.Add("Wander", new WanderState(monster));
         stateDict.Add("Retreat", new RetreatState(monster));
+        stateDict.Add("Aggro", new AggroState(monster));
     }
 
 	public void UpdateParameters(float dt)
@@ -60,7 +61,7 @@ public class MonsterAI  {
             RaycastHit2D[] rayHits = Physics2D.RaycastAll(mPos, pPos - mPos, distance, 1 << LayerMask.NameToLayer("TerrainElement")); // Testing if we hit any terrain elements
             foreach(RaycastHit2D rh in rayHits)
             {
-                TerrainElement te = rh.transform.GetComponent<TerrainElement>();
+                //TerrainElement te = rh.transform.GetComponent<TerrainElement>();
                 //if (te.height > 0)
                     seePlayer = false;
             }
@@ -81,6 +82,12 @@ public class MonsterAI  {
         if (monster.bodyInfo.hp <= 0)
             anim.SetTrigger("HasDied");
     }
+
+    public void MonolithDied()
+    {
+        anim.SetTrigger("MonolithDied");
+    }
+
 
     public void MonsterHitPlayer()
     {

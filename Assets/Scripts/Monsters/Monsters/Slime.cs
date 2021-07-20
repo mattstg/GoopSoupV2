@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Slime : Monster {
 
-    public override void Initialize()
+    public override void Initialize(Monolith spawningMonolith)
     {
-        base.Initialize();
+        base.Initialize(spawningMonolith);
     }
 
     public override void UpdateMonster(float dt)
