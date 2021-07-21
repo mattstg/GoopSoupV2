@@ -40,7 +40,7 @@ public class MonsterFactory {
         return GV.GetRandomElemFromArr<string>(monsterNames);
     }
 
-    public void InitializeFactory()
+    public void Initialize()
     {
         //Loads all prefabs into the factory
         monsterPrefabDict = new Dictionary<string, GameObject>();

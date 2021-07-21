@@ -41,9 +41,9 @@ public class Plant : MonoBehaviour {
         spreadCountdown = GV.GetRandomFromV2(GV.Plants_Breed_Time_Range) * (1 + (GV.Plants_Breed_Time_CountMultiplier * PlantManager.Instance.PlantCount));
     }
 
-    public void UpdatePlant(float dt)
+    public void UpdatePlant()
     {
-        spreadCountdown -= dt;
+        spreadCountdown -= Time.deltaTime;
         if(spreadCountdown <= 0)
         {
             AttemptSpread();

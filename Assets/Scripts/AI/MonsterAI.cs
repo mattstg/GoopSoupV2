@@ -2,83 +2,81 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * The monster AI is the brain. It is the one that scans the world looking for player, and setting values in the animator.
+ * The animator will then use the statemachine to select the current state, and the state will have a script attached to it
+ * example: WanderState.cs
+ * In there will be the logic for acting on a state
+ * 
+ * 
+ * There is a bunch of commented code related with a #
+ *  that # signifys code that would have been written to create a state machine whose states are not Behaviour scripts. This is if we use GenericBehaviour instead of the ones we are using now
+ *  
+ */
+
+
+
 public class MonsterAI  {
 
-    public static string[] stateNames = { "Idle", "Die", "AttackTarget", "ChaseTarget", "Wander", "Retreat", "Aggro" };
 
     Monster monster;
     Monster.AIInfo aiInfo;
     Animator anim;
-	BehaviourManager behaviourManager;
+	//BehaviourManager behaviourManager;
 
-    int currentStateNameHash;       //State machines store thier name as hash values (int representation of the data)
-    float timeInCurrentState = 0;
-
-    Dictionary<string, BaseState> stateDict;
+    float timeEnteredState;
+    float timeInState { get { return Time.time - timeEnteredState; } }
 
 
-	public MonsterAI(Monster _monster)
+
+    public MonsterAI(Monster _monster)
     {
         monster = _monster;
         aiInfo = monster.aiInfo;
         anim = monster.gameObject.AddComponent<Animator> ();
 		anim.runtimeAnimatorController = GameObject.Instantiate<RuntimeAnimatorController> (Resources.Load ("AI/BaseAI") as RuntimeAnimatorController);
-		behaviourManager = new BehaviourManager (anim, this);
-
-        //Create dictionary of state names from state machines with the functions they will call, names must match stateNames above
-        stateDict = new Dictionary<string, BaseState>();
-        stateDict.Add("Idle", new IdleState(monster));
-        stateDict.Add("Die", new DieState(monster));
-        stateDict.Add("AttackTarget", new AttackState(monster));
-        stateDict.Add("ChaseTarget", new ChaseState(monster));
-        stateDict.Add("Wander", new WanderState(monster));
-        stateDict.Add("Retreat", new RetreatState(monster));
-        stateDict.Add("Aggro", new AggroState(monster));
+		//behaviourManager = new BehaviourManager (anim, this);
     }
 
-	public void UpdateParameters(float dt)
+
+    
+
+    public void StateChanged()
+    {
+        timeEnteredState = Time.time;
+    }
+
+
+	public void UpdateParameters()
     {
         //The positions of the player and monster turned to shorthand notation
         Vector2 pPos, mPos; 
         pPos = PlayerManager.Instance.player.transform.position;
         mPos = monster.transform.position;
 
-        //Update time in the current state
-        timeInCurrentState += dt;
-        int _currentState = anim.GetCurrentAnimatorStateInfo(0).shortNameHash;
-        if(_currentState != currentStateNameHash) //We entered a new state, reset the time in state
-        {
-            timeInCurrentState = 0;
-            currentStateNameHash = _currentState;
-        }
+     
+
         bool seePlayer = false;
 
         //Determine if we can see the player
         float distance = Vector2.Distance(pPos, mPos);
         if(distance < aiInfo.aggroRange)
         {
-            seePlayer = true; //We see the player, but is there any obstacles between the two whose height is greater than 0?
-            RaycastHit2D[] rayHits = Physics2D.RaycastAll(mPos, pPos - mPos, distance, 1 << LayerMask.NameToLayer("TerrainElement")); // Testing if we hit any terrain elements
+            //We are close enough to player, but is there a wall blocking the way? Raycast towards the player and see if we hit ground
+            
+            seePlayer = true; //We see the player, now see if we set it false
+            RaycastHit2D[] rayHits = Physics2D.RaycastAll(mPos, pPos - mPos, distance, LayerMask.GetMask("TerrainElement")); // Testing if we hit any terrain elements
             foreach(RaycastHit2D rh in rayHits)
             {
-                //TerrainElement te = rh.transform.GetComponent<TerrainElement>();
-                //if (te.height > 0)
-                    seePlayer = false;
+                seePlayer = false;
             }
         }
+
         anim.SetBool("SeePlayer", seePlayer);
-
-        //Attacks will be done in future, for now monster just rams into you
-        //bool inAttackRange = distance < monsterAttachRange;
-
-        //If in idle or wander state too long, it becomes bored and stops chasing
-        if ((anim.GetCurrentAnimatorStateInfo(0).IsName("Idle") || anim.GetCurrentAnimatorStateInfo(0).IsName("Wander")) && timeInCurrentState > aiInfo.attentionSpan)
-        {
+                
+        if(timeInState > aiInfo.attentionSpan)
             anim.SetTrigger("BoredOfState");
-            timeInCurrentState = 0;
-        }
 
-        //Check if dead
         if (monster.bodyInfo.hp <= 0)
             anim.SetTrigger("HasDied");
     }
@@ -94,37 +92,20 @@ public class MonsterAI  {
         anim.SetTrigger("Retreat");
     }
 
-    //This is called by the behaviour manager, which is called by the state machine
-    public void BehaviourCall(string stateName, BaseState.StateFunction state)
-    {
-        if(!stateDict.ContainsKey(stateName))
-        {
-            Debug.LogError("StateDict does not contain state: " + stateName);
-            return;
-        }
-
-        BaseState bs = stateDict[stateName];
-        switch (state)
-        {
-            case BaseState.StateFunction.Enter:
-                bs.EnterState();
-                break;
-            case BaseState.StateFunction.Update:
-                bs.StayState(Time.deltaTime); //This is called by state machine, it is outside our flow
-                break;
-            case BaseState.StateFunction.Exit:
-                bs.ExitState();
-                break;
-            default:
-                Debug.LogError("Unhandled state: " + state.ToString());
-                break;
-        }
-    }
 
 
+    //When the monster is recycled (depooled) we reset the values
     public void Depooled()
     {
-        behaviourManager.Depooled();
+        anim.SetTrigger("ResetStateMachine");
+        
+
+        anim.SetBool("SeePlayer", false);
+        anim.ResetTrigger("BoredOfState");
+        anim.ResetTrigger("HasDied");
+        anim.ResetTrigger("HasDied");
+        anim.ResetTrigger("MonolithDied");
+        anim.ResetTrigger("Retreat");
     }
 
 }

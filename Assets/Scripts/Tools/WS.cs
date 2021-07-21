@@ -9,8 +9,5 @@ public class WS : MonoBehaviour {
     public UnityEngine.Tilemaps.TileBase rockTile;
     public AnimationCurve thrownAnim;
 
-    public void Awake()
-    {
-        GV.ws = this;
-    }
+   
 }

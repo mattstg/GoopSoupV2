@@ -30,9 +30,15 @@ public class Monster : MonoBehaviour, IPoolable {
 		ai = new MonsterAI (this);          //Atm there is only one kind of AI, so it is just initalized in here
     }
 
-	public virtual void UpdateMonster(float dt){
-        ai.UpdateParameters(dt); //This code updates the AI, who in turn calls BehaviourCall
+	public virtual void UpdateMonster(){
+        ai.UpdateParameters(); //This code updates the AI, who in turn calls BehaviourCall
 	}
+
+    public void MonsterEnteredNewState()
+    {
+        //The state machine will call this function on the monster, I need to tell my monster brain that I have entered a new state, so it can reset it's timer
+        ai.StateChanged();
+    }
 
 	public virtual void OnTriggerEnter2D(Collider2D coli)
 	{

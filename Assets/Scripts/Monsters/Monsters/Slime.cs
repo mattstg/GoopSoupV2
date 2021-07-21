@@ -9,8 +9,8 @@ public class Slime : Monster {
         base.Initialize(spawningMonolith);
     }
 
-    public override void UpdateMonster(float dt)
+    public override void UpdateMonster()
     {
-        base.UpdateMonster(dt);
+        base.UpdateMonster();
     }
 }

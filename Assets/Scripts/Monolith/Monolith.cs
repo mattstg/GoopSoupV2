@@ -8,7 +8,7 @@ public class Monolith : MonoBehaviour, IUpdatable
 
     public Ingredient ingredient;
     public SpriteRenderer symbols;
-    public SpriteRenderer sr;
+    SpriteRenderer sr;
     string monsterType;
     float timeOfNextMonsterSpawn;
     HashSet<Monster> monsters;
@@ -33,14 +33,7 @@ public class Monolith : MonoBehaviour, IUpdatable
         }
     }
 
-    public static Monolith SpawnRandomMonolith()
-    {
-        GameObject monoObj = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Monolith/Monolith"));
-        Monolith toRet = monoObj.GetComponent<Monolith>();
-        toRet.Initialize();
-        monoObj.transform.position = GV.GetRandomSpotInMap();
-        return toRet;
-    }
+    
 
     public void MonsterDied(Monster toRemove)
     {
@@ -66,5 +59,16 @@ public class Monolith : MonoBehaviour, IUpdatable
             yield return null;
         }
         GameObject.Destroy(gameObject);
+    }
+
+
+    //Intresting method for having the code to spawn a monolith inside the class itself instead of in the manager. However, this is breaking the coherence of our code... making it harder to debug, this should be inside the manager instead!
+    public static Monolith SpawnRandomMonolith()
+    {
+        GameObject monoObj = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Monolith/Monolith"));
+        Monolith toRet = monoObj.GetComponent<Monolith>();
+        toRet.Initialize();
+        monoObj.transform.position = GV.GetRandomSpotInMap();
+        return toRet;
     }
 }

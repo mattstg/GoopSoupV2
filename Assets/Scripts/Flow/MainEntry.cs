@@ -4,21 +4,45 @@ using UnityEngine;
 
 public class MainEntry : MonoBehaviour {
 
-    //This will be called by MainEntryCreator, is entry to program
-    public void Initialize()
+    //There should only ever be one of these
+
+    public void Awake()
     {
-        GameObject.DontDestroyOnLoad(gameObject);
-        FlowManager.Instance.InitializeFlowManager((FlowManager.SceneNames)System.Enum.Parse(typeof(FlowManager.SceneNames), UnityEngine.SceneManagement.SceneManager.GetActiveScene().name));
+        GV.ws = GameObject.FindObjectOfType<WS>(); //We gotta setup all the links first.
+
+        //System level things
+        InputManager.Instance.Initialize();
+        ObjectPool.Instance.Initialize();
+
+        //World things
+        LevelGenerator.Instance.GenerateWorldMap(GV.Map_Size_XY);
+        PlayerManager.Instance.Initialize();
+        MonsterFactory.Instance.Initialize();
+        PlantManager.Instance.Initialize();
+        MonolithManager.Instance.Initialize();
+
+
     }
-   
+
+    public void Start()
+    {
+        //Later initialization could be called here, but we have none to call
+    }
+
+
     public void Update()
     {
-        FlowManager.Instance.Update(Time.deltaTime);
+        InputManager.Instance.Update();
+        PlayerManager.Instance.Update();
+        MonsterManager.Instance.Update();
+        PlantManager.Instance.Update();
+        MonolithManager.Instance.Update();
     }
 
     public void FixedUpdate()
     {
-        FlowManager.Instance.FixedUpdate(Time.fixedDeltaTime);
+        //FlowManager.Instance.FixedUpdate(Time.fixedDeltaTime);
+        PlayerManager.Instance.FixedUpdate();
     }
 
 

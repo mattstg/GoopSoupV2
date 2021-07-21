@@ -40,16 +40,16 @@ public class PlayerManager
         cauldron.transform.position = GV.GetRandomSpotNear(loc, 1);
     }
 
-    public void Update(float dt)
+    public void Update()
     {
         if (player)
-            player.UpdatePlayer(dt);
+            player.UpdatePlayer();
     }
 
-    public void FixedUpdate(float dt)
+    public void FixedUpdate()
     {
         if (player)
-            player.FixedUpdatePlayer(dt);
+            player.FixedUpdatePlayer();
     }
 
     public void PlayerDied()

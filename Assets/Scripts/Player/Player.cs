@@ -8,7 +8,6 @@ public class Player : MonoBehaviour
     readonly static float Player_Hp_Max = 10;
 
     bool initialized = false;
-    InputManager inputManager;
     Rigidbody2D rb;
     int carryMask;
     Vector2 lastMovedDir;
@@ -31,8 +30,7 @@ public class Player : MonoBehaviour
 
     public void PlayerFirstInitialize()
     {
-        inputManager = new InputManager();
-        inputManager.InitializeManager();
+        
         rb = GetComponent<Rigidbody2D>();
         //Created a transform spot for hand, so consume it
         Transform handTransform = transform.Find("HandSpot");
@@ -42,13 +40,13 @@ public class Player : MonoBehaviour
         carryMask = (1 << LayerMask.NameToLayer("Plant") | 1 << LayerMask.NameToLayer("Cauldron") | (1 << LayerMask.NameToLayer("Potion")));
     }
 
-    public void UpdatePlayer(float dt)
+    public void UpdatePlayer()
     {
+
         if (Input.GetKeyDown(KeyCode.I))
             HealthPopupManager.Instance.ModHP(transform, 2.5f);
 
-        inputManager.UpdateManager(dt);
-        InputManager.InputInfo inputInfo = inputManager.GetInputInfo();
+        InputManager.InputInfo inputInfo = InputManager.Instance.GetInputInfo();
         lastMovedDir = (inputInfo.dirPressed == new Vector2()) ? lastMovedDir : inputInfo.dirPressed ;
 
         if (inputInfo.pickDropPressed)
@@ -182,9 +180,9 @@ public class Player : MonoBehaviour
         return toRet;
     }
 
-    public void FixedUpdatePlayer(float dt)
+    public void FixedUpdatePlayer()
     {
-        InputManager.InputInfo inputInfo = inputManager.GetInputInfo();
+        InputManager.InputInfo inputInfo = InputManager.Instance.GetInputInfo();
         Move(inputInfo.dirPressed);
     }
 

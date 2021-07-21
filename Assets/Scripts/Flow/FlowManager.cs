@@ -1,8 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+
+/*
+ This class is depreciated, it is used to manage multiple flows across scenes. Useful when making a game with a bunch of minigames or scenes in it (cinematics, etc). But overkill for this project. Everything
+is handled in mainEntry instead.
+  
+  
+ */
+[Obsolete("FlowManager is depreciated, It's use was to managed multiple flows (game flow, main menu flow)")]
 public class FlowManager  {
     public enum SceneNames { MainMenu, MainScene }
 

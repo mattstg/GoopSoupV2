@@ -31,7 +31,7 @@ public class MonsterManager {
         monstersToAddStack = new Stack<Monster>();
     }
 
-    public void UpdateMonsterManager(float dt)
+    public void Update()
     {
         //Remove monsters from the dictionary from the RemoveStack
         while (monstersToRemoveStack.Count > 0)
@@ -77,7 +77,7 @@ public class MonsterManager {
         //monsterSpawner.UpdateMonsterSpawner(dt);
         foreach (KeyValuePair<System.Type,List<Monster>> kv in monsterDict)
             foreach(Monster m in kv.Value)
-                m.UpdateMonster(dt);
+                m.UpdateMonster();
     }
 
     public void CreateSpawner(Vector2 loc)

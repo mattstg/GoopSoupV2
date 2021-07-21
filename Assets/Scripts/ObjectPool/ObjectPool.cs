@@ -29,6 +29,12 @@ public class ObjectPool  {
         objectPoolParent.name = "ObjectPool";
     }
 
+
+    public void Initialize()
+    {
+        //We could pre-pool here if we wanted. But we are not.
+    }
+
     public void AddToPool(string objName, IPoolable poolable)
     {
         if (!pooledObjects.ContainsKey(objName))

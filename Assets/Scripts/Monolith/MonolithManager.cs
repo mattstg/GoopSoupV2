@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+/*
+ Where is the updating of the monolith manager? It is defiantly called right? you can prove that?
+  
+ */
 public class MonolithManager : GenericManager<Monolith> {
     #region
     private static MonolithManager instance;
@@ -31,9 +36,9 @@ public class MonolithManager : GenericManager<Monolith> {
             AddItem(Monolith.SpawnRandomMonolith());
     }
 
-    public override void UpdateManager(float dt)
+    public override void Update()
     {
-        base.UpdateManager(dt);
+        base.Update();
         if(timeTillnextMonolith <= Time.time)
         {
             AddItem(Monolith.SpawnRandomMonolith());

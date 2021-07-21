@@ -2,9 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Obsolete("This class was used for the Generic script system and Generic Statemachine, you'll have to go back a git commit to see where and how this was used")]
 public class BehaviourManager  {
 	//must be all the animation names which have behaviour scripts
-	
+	/*
+	 * 
+	 * 
 	private Dictionary<int,string> hashToName = new Dictionary<int, string>();
 	StateMachineBehaviour[] behaviour;
 	Animator anim;
@@ -41,5 +44,5 @@ public class BehaviourManager  {
 
 
         //Debug.Log ("State Name: " + name + ". Current phase: " + state.ToString());
-	}
+	}*/
 }

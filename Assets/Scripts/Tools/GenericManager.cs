@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+ * This is an example of a generic manager, it can manage any type T. Only the monolith is using it, however it could be used for ALL managers, and all future managers too!
+ * 
+ * */
 public class GenericManager<T> where T : IUpdatable  {
-    //Second level should be a singleton!, this level cannot be one, otherwise it would cause the base layer to be returned
+    //Second level should be a singleton!, this level cannot be one!! otherwise it would cause the base layer to be returned
 
     List<T> managingList;
     Stack<T> toRemoveStack;
@@ -21,11 +25,11 @@ public class GenericManager<T> where T : IUpdatable  {
 
     }
 
-    public virtual void UpdateManager(float dt)
+    public virtual void Update()
     {
         UpdateStackElements();
         foreach (T t in managingList)
-            t.IUpdate(dt);
+            t.IUpdate(Time.deltaTime);
     }
 
     private void UpdateStackElements()

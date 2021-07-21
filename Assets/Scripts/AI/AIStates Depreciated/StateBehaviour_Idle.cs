@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//No idea what this class is, looks like some sort of failed expirement early on or an example to teach something.
+
 public class StateBehaviour_Idle : StateMachineBehaviour
 {
     Monster m;

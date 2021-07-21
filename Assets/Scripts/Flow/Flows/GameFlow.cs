@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Reflection;
 
+//Part of the depreciated FlowManger system, no longer in use. All in MainEntry now
 public class GameFlow : Flow {
-
+    /*
 	public override void InitializeFlow()
     {
         LevelGenerator.Instance.GenerateWorldMap(GV.Map_Size_XY);
@@ -27,5 +28,5 @@ public class GameFlow : Flow {
     public override void FixedUpdateFlow(float dt)
     {
         PlayerManager.Instance.FixedUpdate(dt);
-    }
+    }*/
 }

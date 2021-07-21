@@ -4,31 +4,47 @@ using UnityEngine;
 
 public class InputManager
 {
-    bool updateProccessed = false;
+    #region singleton
+    private static InputManager instance;
+
+    private InputManager() { }
+
+    public static InputManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = new InputManager();
+            }
+            return instance;
+        }
+    }
+    #endregion
+
+
     InputInfo inputInfo;
 
-    public void InitializeManager()
-    {
+    
 
+    //This class puts all input into an easy to read InputClass
+    public void Initialize()
+    {
+        inputInfo = new InputInfo(Vector2.zero,false,false,false);
     }
 
     //THIS SHOULD BE CALLED BEFORE ANY GetInputInfo is called!!!! else will give last updates info
-    public void UpdateManager(float dt)
+    public void Update()
     {
-        updateProccessed = false;
+        inputInfo = CreateInputInfo();
     }
 
     /// <summary>
-    /// Returns this updates inputInfo, generates one if first call this update
+    /// Returns this updates inputInfo
     /// </summary>
-    /// <returns>This updates inputInfo</returns>
+    /// <returns>This gets inputInfo</returns>
     public InputInfo GetInputInfo()
     {
-        if (!updateProccessed)
-        {
-            inputInfo = CreateInputInfo();
-            updateProccessed = true;
-        }
         return inputInfo;
     }
 

@@ -34,10 +34,11 @@ public class PlantManager  {
         plants = new List<Plant>();
         plantGroup = new GameObject().transform;
         plantGroup.name = "PlantGroup";
-        plantPlacementLayerCheck = (1 << LayerMask.NameToLayer("Plant") | 1 << LayerMask.NameToLayer("Cauldron") | 1 << LayerMask.NameToLayer("MapEdges"));
+        plantPlacementLayerCheck = LayerMask.GetMask("Plant", "Cauldron", "MapEdges");
+        FillWorldWithPlants(GV.Plants_InitialSpawnCount);
     }
 
-    public void FillWorldWithPlants(int numOfPlants)
+    private void FillWorldWithPlants(int numOfPlants)
     {
         //I want to have one of each unique type first
         for(int i = 0; i < numOfPlants; i++)
@@ -60,9 +61,10 @@ public class PlantManager  {
         }
     }
 
+    //Could use a prefab, but just created it this way.
     public void CreateNewPlant(Vector2 loc, Ingredient ingredients, Sprite sprite)
     {
-        GameObject newPlant = new GameObject();
+        GameObject newPlant = new GameObject(); //Creates new empty gameobject in the scene
         newPlant.name = "Plant";
         Plant plantScript = newPlant.AddComponent<Plant>();
         plantScript.InitializePlant(ingredients, sprite);
@@ -92,11 +94,11 @@ public class PlantManager  {
         return new Vector2(-1,-1);
     }
 
-    public void UpdatePlants(float dt)
+    public void Update()
     {
         for(int i = plants.Count - 1; i >= 0; i--)
             if(plants[i])
-                plants[i].UpdatePlant(dt);
+                plants[i].UpdatePlant();
     }
 
 
