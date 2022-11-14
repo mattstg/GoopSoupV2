@@ -552,6 +552,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -560,9 +561,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -583,6 +584,8 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -4382,6 +4385,183 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      Asets_110: 21300220
+      Asets_99: 21300198
+      Asets_23: 21300046
+      Asets_35: 21300070
+      Asets_42: 21300084
+      Asets_119: 21300238
+      Asets_152: 21300304
+      Asets_146: 21300292
+      Asets_63: 21300126
+      Asets_101: 21300202
+      Asets_136: 21300272
+      Asets_47: 21300094
+      Asets_65: 21300130
+      Asets_46: 21300092
+      Asets_44: 21300088
+      Asets_18: 21300036
+      Asets_69: 21300138
+      Asets_86: 21300172
+      Asets_62: 21300124
+      Asets_175: 21300350
+      Asets_122: 21300244
+      Asets_135: 21300270
+      Asets_91: 21300182
+      Asets_83: 21300166
+      Asets_58: 21300116
+      Asets_28: 21300056
+      Asets_5: 21300010
+      Asets_92: 21300184
+      Asets_89: 21300178
+      Asets_102: 21300204
+      Asets_10: 21300020
+      Asets_116: 21300232
+      Asets_57: 21300114
+      Asets_96: 21300192
+      Asets_87: 21300174
+      Asets_100: 21300200
+      Asets_154: 21300308
+      Asets_34: 21300068
+      Asets_143: 21300286
+      Asets_15: 21300030
+      Asets_129: 21300258
+      Asets_103: 21300206
+      Asets_153: 21300306
+      Asets_7: 21300014
+      Asets_75: 21300150
+      Asets_51: 21300102
+      Asets_142: 21300284
+      Asets_148: 21300296
+      Asets_17: 21300034
+      Asets_49: 21300098
+      Asets_61: 21300122
+      Asets_162: 21300324
+      Asets_132: 21300264
+      Asets_54: 21300108
+      Asets_48: 21300096
+      Asets_60: 21300120
+      Asets_159: 21300318
+      Asets_31: 21300062
+      Asets_118: 21300236
+      Asets_163: 21300326
+      Asets_77: 21300154
+      Asets_40: 21300080
+      Asets_115: 21300230
+      Asets_50: 21300100
+      Asets_111: 21300222
+      Asets_94: 21300188
+      Asets_157: 21300314
+      Asets_125: 21300250
+      Asets_32: 21300064
+      Asets_38: 21300076
+      Asets_174: 21300348
+      Asets_160: 21300320
+      Asets_66: 21300132
+      Asets_134: 21300268
+      Asets_59: 21300118
+      Asets_68: 21300136
+      Asets_104: 21300208
+      Asets_124: 21300248
+      Asets_79: 21300158
+      Asets_123: 21300246
+      Asets_126: 21300252
+      Asets_147: 21300294
+      Asets_145: 21300290
+      Asets_161: 21300322
+      Asets_13: 21300026
+      Asets_150: 21300300
+      Asets_140: 21300280
+      Asets_98: 21300196
+      Asets_171: 21300342
+      Asets_112: 21300224
+      Asets_139: 21300278
+      Asets_3: 21300006
+      Asets_24: 21300048
+      Asets_137: 21300274
+      Asets_169: 21300338
+      Asets_120: 21300240
+      Asets_78: 21300156
+      Asets_76: 21300152
+      Asets_173: 21300346
+      Asets_144: 21300288
+      Asets_2: 21300004
+      Asets_141: 21300282
+      Asets_97: 21300194
+      Asets_167: 21300334
+      Asets_170: 21300340
+      Asets_1: 21300002
+      Asets_81: 21300162
+      Asets_84: 21300168
+      Asets_12: 21300024
+      Asets_55: 21300110
+      Asets_19: 21300038
+      Asets_64: 21300128
+      Asets_82: 21300164
+      Asets_107: 21300214
+      Asets_149: 21300298
+      Asets_117: 21300234
+      Asets_156: 21300312
+      Asets_25: 21300050
+      Asets_16: 21300032
+      Asets_52: 21300104
+      Asets_72: 21300144
+      Asets_37: 21300074
+      Asets_113: 21300226
+      Asets_26: 21300052
+      Asets_158: 21300316
+      Asets_70: 21300140
+      Asets_108: 21300216
+      Asets_128: 21300256
+      Asets_67: 21300134
+      Asets_164: 21300328
+      Asets_53: 21300106
+      Asets_85: 21300170
+      Asets_114: 21300228
+      Asets_155: 21300310
+      Asets_29: 21300058
+      Asets_90: 21300180
+      Asets_36: 21300072
+      Asets_151: 21300302
+      Asets_105: 21300210
+      Asets_30: 21300060
+      Asets_95: 21300190
+      Asets_6: 21300012
+      Asets_43: 21300086
+      Asets_11: 21300022
+      Asets_93: 21300186
+      Asets_106: 21300212
+      Asets_121: 21300242
+      Asets_56: 21300112
+      Asets_71: 21300142
+      Asets_0: 21300000
+      Asets_172: 21300344
+      Asets_166: 21300332
+      Asets_130: 21300260
+      Asets_21: 21300042
+      Asets_73: 21300146
+      Asets_74: 21300148
+      Asets_9: 21300018
+      Asets_131: 21300262
+      Asets_22: 21300044
+      Asets_39: 21300078
+      Asets_45: 21300090
+      Asets_168: 21300336
+      Asets_4: 21300008
+      Asets_14: 21300028
+      Asets_27: 21300054
+      Asets_41: 21300082
+      Asets_127: 21300254
+      Asets_138: 21300276
+      Asets_165: 21300330
+      Asets_33: 21300066
+      Asets_8: 21300016
+      Asets_133: 21300266
+      Asets_88: 21300176
+      Asets_109: 21300218
+      Asets_80: 21300160
+      Asets_20: 21300040
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

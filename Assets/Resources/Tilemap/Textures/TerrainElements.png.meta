@@ -417,6 +417,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -425,9 +426,9 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: -1
-    aniso: -1
-    mipBias: -100
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -448,6 +449,8 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -3302,6 +3305,138 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      TerrainElements_41: 21300082
+      TerrainElements_84: 21300168
+      TerrainElements_31: 21300062
+      TerrainElements_100: 21300200
+      TerrainElements_102: 21300204
+      TerrainElements_96: 21300192
+      TerrainElements_116: 21300232
+      TerrainElements_14: 21300028
+      TerrainElements_121: 21300242
+      TerrainElements_16: 21300032
+      TerrainElements_59: 21300118
+      TerrainElements_87: 21300174
+      TerrainElements_27: 21300054
+      TerrainElements_58: 21300116
+      TerrainElements_89: 21300178
+      TerrainElements_111: 21300222
+      TerrainElements_101: 21300202
+      TerrainElements_126: 21300252
+      TerrainElements_55: 21300110
+      TerrainElements_107: 21300214
+      TerrainElements_32: 21300064
+      TerrainElements_38: 21300076
+      TerrainElements_80: 21300160
+      TerrainElements_0: 21300000
+      TerrainElements_129: 21300258
+      TerrainElements_4: 21300008
+      TerrainElements_127: 21300254
+      TerrainElements_20: 21300040
+      TerrainElements_23: 21300046
+      TerrainElements_122: 21300244
+      TerrainElements_13: 21300026
+      TerrainElements_11: 21300022
+      TerrainElements_118: 21300236
+      TerrainElements_21: 21300042
+      TerrainElements_3: 21300006
+      TerrainElements_86: 21300172
+      TerrainElements_98: 21300196
+      TerrainElements_82: 21300164
+      TerrainElements_60: 21300120
+      TerrainElements_26: 21300052
+      TerrainElements_92: 21300184
+      TerrainElements_34: 21300068
+      TerrainElements_49: 21300098
+      TerrainElements_68: 21300136
+      TerrainElements_93: 21300186
+      TerrainElements_94: 21300188
+      TerrainElements_99: 21300198
+      TerrainElements_108: 21300216
+      TerrainElements_112: 21300224
+      TerrainElements_28: 21300056
+      TerrainElements_37: 21300074
+      TerrainElements_10: 21300020
+      TerrainElements_36: 21300072
+      TerrainElements_40: 21300080
+      TerrainElements_43: 21300086
+      TerrainElements_47: 21300094
+      TerrainElements_83: 21300166
+      TerrainElements_6: 21300012
+      TerrainElements_2: 21300004
+      TerrainElements_90: 21300180
+      TerrainElements_119: 21300238
+      TerrainElements_69: 21300138
+      TerrainElements_104: 21300208
+      TerrainElements_57: 21300114
+      TerrainElements_67: 21300134
+      TerrainElements_25: 21300050
+      TerrainElements_18: 21300036
+      TerrainElements_97: 21300194
+      TerrainElements_103: 21300206
+      TerrainElements_42: 21300084
+      TerrainElements_19: 21300038
+      TerrainElements_73: 21300146
+      TerrainElements_77: 21300154
+      TerrainElements_35: 21300070
+      TerrainElements_61: 21300122
+      TerrainElements_63: 21300126
+      TerrainElements_78: 21300156
+      TerrainElements_46: 21300092
+      TerrainElements_115: 21300230
+      TerrainElements_39: 21300078
+      TerrainElements_72: 21300144
+      TerrainElements_106: 21300212
+      TerrainElements_5: 21300010
+      TerrainElements_123: 21300246
+      TerrainElements_74: 21300148
+      TerrainElements_88: 21300176
+      TerrainElements_30: 21300060
+      TerrainElements_9: 21300018
+      TerrainElements_76: 21300152
+      TerrainElements_120: 21300240
+      TerrainElements_51: 21300102
+      TerrainElements_17: 21300034
+      TerrainElements_24: 21300048
+      TerrainElements_64: 21300128
+      TerrainElements_44: 21300088
+      TerrainElements_130: 21300260
+      TerrainElements_62: 21300124
+      TerrainElements_1: 21300002
+      TerrainElements_48: 21300096
+      TerrainElements_110: 21300220
+      TerrainElements_52: 21300104
+      TerrainElements_117: 21300234
+      TerrainElements_125: 21300250
+      TerrainElements_81: 21300162
+      TerrainElements_15: 21300030
+      TerrainElements_56: 21300112
+      TerrainElements_54: 21300108
+      TerrainElements_91: 21300182
+      TerrainElements_85: 21300170
+      TerrainElements_29: 21300058
+      TerrainElements_114: 21300228
+      TerrainElements_95: 21300190
+      TerrainElements_105: 21300210
+      TerrainElements_45: 21300090
+      TerrainElements_70: 21300140
+      TerrainElements_22: 21300044
+      TerrainElements_8: 21300016
+      TerrainElements_65: 21300130
+      TerrainElements_113: 21300226
+      TerrainElements_75: 21300150
+      TerrainElements_66: 21300132
+      TerrainElements_128: 21300256
+      TerrainElements_124: 21300248
+      TerrainElements_79: 21300158
+      TerrainElements_50: 21300100
+      TerrainElements_53: 21300106
+      TerrainElements_12: 21300024
+      TerrainElements_7: 21300014
+      TerrainElements_109: 21300218
+      TerrainElements_33: 21300066
+      TerrainElements_71: 21300142
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
